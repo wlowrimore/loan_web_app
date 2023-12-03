@@ -1,7 +1,11 @@
-import { Inter } from 'next/font/google'
+import { Nunito_Sans } from 'next/font/google'
 import './globals.css'
+import MobileHeader from './components/MobileHeader'
 
-const inter = Inter({ subsets: ['latin'] })
+const nunito = Nunito_Sans({
+  subsets: ['latin'],
+  weights: ['200', '400', '600', '800', '900']
+})
 
 export const metadata = {
   title: 'Create Next App',
@@ -11,7 +15,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${nunito.className} w-screen h-screen mx-auto container`}>
+        <main className=''>
+          <MobileHeader />
+          {children}
+        </main>
+      </body>
     </html>
   )
 }
