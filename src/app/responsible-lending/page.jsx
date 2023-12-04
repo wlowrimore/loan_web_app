@@ -34,7 +34,7 @@ const ResponsibleLending = () => {
 
         As required by law or ordered by a court, regulatory, or administrative agency;
 
-        As we deem necessary, in our sole discretion, if we believe that you are violating any applicable law, rule or regulation, or are otherwise interfering with another's rights or property, including, without limitation, our rights or property;
+        As we deem necessary, in our sole discretion, if we believe that you are violating any applicable law, rule or regulation, or are otherwise interfering with another&apos;s rights or property, including, without limitation, our rights or property;
 
         To enforce this Privacy Policy, and any other applicable agreements and policies;
 
