@@ -40,6 +40,7 @@ const LoanRequestForm = () => {
               $
             </span>
             <input
+              id='req-amount'
               onChange={handleOnChange}
               type='number'
               className='w-full py-1 pr-2 border-t border-b border-r border-emerald-800 rounded-tr rounded-br outline-none'
