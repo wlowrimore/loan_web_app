@@ -4,7 +4,7 @@ import LoanRequestForm from '../components/forms/LoanRequestForm'
 
 const HomePage = () => {
   return (
-    <div className='w-full flex flex-col items-center px-4'>
+    <div className='w-full flex flex-col items-center px-4 py-12'>
       <h1 className='text-center text-4xl text-emerald-800 font-bold capitalize mb-12'>We&apos;re here to help</h1>
       <div className='w-full h-[1rem] border border-emerald-800 rounded-xl'>
         <div className='w-1/3 h-full bg-emerald-400 rounded-r-xl' />
