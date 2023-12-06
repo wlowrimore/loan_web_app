@@ -2,10 +2,9 @@
 
 import { getServerSession } from "next-auth"
 import { authOptions } from "./api/auth/[...nextauth]/route"
-import TestPage from "./Test/page"
 import HomePage from "./home/page"
-import TestUser from "./components/TestUser"
 import { LoginButton, LogoutButton } from "./components/Auth"
+import TestUser from "./components/TestUser"
 
 export default async function Home() {
   const session = await getServerSession(authOptions)
@@ -20,7 +19,6 @@ export default async function Home() {
       <pre>{JSON.stringify(session)}</pre>
       <h1 className="text-2xl font-bold">Client Call</h1>
       <TestUser />
-      {/* <TestPage /> */}
       {/* <HomePage /> */}
     </div>
   )

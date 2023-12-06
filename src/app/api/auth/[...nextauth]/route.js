@@ -47,15 +47,41 @@ export const authOptions = {
           return {
             id: user.id + '',
             email: user.email,
-            firstName: user.firstName,
-            lastName: user.lastName,
+            name: user.name,
+            randomKey: 'Jazz'
           }
         } catch (error) {
           console.error('Unexpected error during authentication', error)
         }
       }
     })
-  ]
+  ],
+  callbacks: {
+    session: ({ session, token }) => {
+      console.log('SESSION CALLBACK:', { token, session })
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id,
+          randomKey: token.randomKey
+        }
+      }
+      return session
+    },
+    jwt: ({ token, user }) => {
+      console.log('JWT CALLBACK:', { token, user })
+      if (user) {
+        const u = user
+        return {
+          ...token,
+          id: u.id,
+          randomKey: u.randomKey
+        }
+      }
+      return token
+    }
+  }
 }
 
 const handler = NextAuth(authOptions)
