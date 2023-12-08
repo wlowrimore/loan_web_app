@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth"
 import { authOptions } from "./api/auth/[...nextauth]/route"
-import HomePage from "./home/page"
+import LoanRequestPage from "./loan-request/page"
 import LandingPage from "./components/LandingPage"
 // import TestUser from "./components/TestUser"
 

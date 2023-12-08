@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import Logo from 'public/header-logo.svg'
 import { LoginButton, LogoutButton, SignUpButton } from './Auth'
 import { getServerSession } from 'next-auth'
@@ -22,7 +21,7 @@ const MobileHeader = async () => {
           />
         </Link>
         <span className='text-xl flex items-end'>|</span>
-        {user ? (
+        {session ? (
           <div className='flex w-full'>
             <p className='flex items-end justify-between w-full text-sm'>{user}
               <span className='text-emerald-600'><LogoutButton /></span>

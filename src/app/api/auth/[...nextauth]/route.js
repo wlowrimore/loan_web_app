@@ -10,14 +10,8 @@ export const authOptions = {
   providers: [
     CredentialsProvider({
       name: 'Sign in',
-      credentials: {
-        email: {
-          label: 'Email',
-          type: 'email',
-          placeholder: 'hello@example.com'
-        },
-        password: { label: 'Password', type: 'password' }
-      },
+      typ: 'credentials',
+      credentials: {},
       async authorize(credentials) {
         try {
           if (!credentials?.email || !credentials.password) {
@@ -56,6 +50,9 @@ export const authOptions = {
       }
     })
   ],
+  pages: {
+    signIn: '/signin'
+  },
   callbacks: {
     session: ({ session, token }) => {
       console.log('SESSION CALLBACK:', { token, session })

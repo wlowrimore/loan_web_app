@@ -1,16 +1,16 @@
 import React from 'react'
-import RegisterUser from '../components/forms/RegisterUser'
+import SignInForm from '../components/forms/SignInForm'
 import PageHeader from '../components/PageHeader'
 
-const RegisterPage = () => {
+const SignIn = () => {
   return (
     <div className='h-full w-screen flex flex-col items-center px-4'>
       <PageHeader />
       <div className='shadow-xl w-full mx-4 pb-1 md:w-1/3'>
-        <RegisterUser />
+        <SignInForm />
       </div>
     </div>
   )
 }
 
-export default RegisterPage
+export default SignIn

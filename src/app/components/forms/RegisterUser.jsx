@@ -49,7 +49,7 @@ const RegisterUser = () => {
         type='text'
         id='name'
         placeholder='Full Name'
-        className='w-full py-1 border-b border-neutral-500 bg-transparent outline-none focus:placeholder:text-emerald-700 focus:placeholder:opacity-70 focus:placeholder:translate-x-[17.5rem] focus:placeholder:text-xs focus:placeholder:transition focus:placeholder:duration-[600ms] focus:placeholder:ease-out'
+        className='w-full border-b border-neutral-500 bg-transparent outline-none focus:placeholder:text-emerald-700 focus:placeholder:opacity-70 focus:placeholder:translate-x-[17.5rem] focus:placeholder:text-xs focus:placeholder:transition focus:placeholder:duration-[600ms] focus:placeholder:ease-out'
       />
 
       <input
@@ -59,7 +59,7 @@ const RegisterUser = () => {
         type='email'
         id='email'
         placeholder='Email'
-        className='w-full py-1 border-b border-neutral-500 bg-transparent outline-none focus:placeholder:text-emerald-700 focus:placeholder:opacity-70 focus:placeholder:translate-x-[17.5rem] focus:placeholder:text-xs focus:placeholder:transition focus:placeholder:duration-[600ms] focus:placeholder:ease-out'
+        className='w-full border-b border-neutral-500 bg-transparent outline-none focus:placeholder:text-emerald-700 focus:placeholder:opacity-70 focus:placeholder:translate-x-[17.5rem] focus:placeholder:text-xs focus:placeholder:transition focus:placeholder:duration-[600ms] focus:placeholder:ease-out'
       />
 
       <input
@@ -69,7 +69,7 @@ const RegisterUser = () => {
         type='password'
         id='password'
         placeholder='Password'
-        className='w-full py-1 border-b border-neutral-500 bg-transparent outline-none focus:placeholder:text-emerald-700 focus:placeholder:opacity-70 focus:placeholder:translate-x-[16rem] focus:placeholder:text-xs focus:placeholder:transition focus:placeholder:duration-[600ms] focus:placeholder:ease-out'
+        className='w-full border-b border-neutral-500 bg-transparent outline-none focus:placeholder:text-emerald-700 focus:placeholder:opacity-70 focus:placeholder:translate-x-[16rem] focus:placeholder:text-xs focus:placeholder:transition focus:placeholder:duration-[600ms] focus:placeholder:ease-out'
       />
       {error && <Alert>{error}</Alert>}
       <button className='w-full bg-emerald-300 font-bold py-2 px-6 rounded outline-none'>Create Account</button>
