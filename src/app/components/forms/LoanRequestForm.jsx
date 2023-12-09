@@ -2,37 +2,39 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link';
+import PersonalInfo from './loan-form-components/PersonalInfo';
 
 const LoanRequestForm = () => {
-  const [selected, setSelected] = useState('');
-  const [loanAmount, setLoanAmount] = useState('');
-  const [formData, setFormData] = useState()
+  // const [selected, setSelected] = useState('');
+  // const [loanAmount, setLoanAmount] = useState('');
+  // const [formData, setFormData] = useState()
 
-  const handleOnSelect = (value) => {
-    setSelected(value);
-  }
+  // const handleOnSelect = (value) => {
+  //   setSelected(value);
+  // }
 
-  const handleOnChange = (e) => {
-    setLoanAmount(e.target.value)
-  }
+  // const handleOnChange = (e) => {
+  //   setLoanAmount(e.target.value)
+  // }
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault()
-    const loan = {
-      loanAmount,
-      selected
-    }
-    setFormData(loan)
-  }
+  // const handleFormSubmit = (e) => {
+  //   e.preventDefault()
+  //   const loan = {
+  //     loanAmount,
+  //     selected
+  //   }
+  //   setFormData(loan)
+  // }
 
-  useEffect(() => {
-    console.log('Form Data:', formData);
-  }, [formData])
+  // useEffect(() => {
+  //   console.log('Form Data:', formData);
+  // }, [formData])
 
   return (
     <>
-      <section className='w-full border border-emerald-800 rounded-tl rounded-tr bg-green-100/40 py-6 px-4 mt-8'>
-        <form onSubmit={handleFormSubmit} className='flex flex-col justify-center'>
+      <section className='w-full border border-emerald-800 rounded-tl rounded-tr bg-green-800/60 py-2 px-4 mt-8'>
+        <PersonalInfo />
+        {/* <form onSubmit={handleFormSubmit} className='flex flex-col justify-center'>
           <h2 className='text-2xl text-emerald-800 font-bold mb-4'>What Are Your Needs?</h2>
           <p className='font-bold text-md text-emerald-800 tracking-wide'>Requested Amount</p>
           <div className='flex items-center'>
@@ -66,7 +68,7 @@ const LoanRequestForm = () => {
               Continue
             </button>
           </div>
-        </form>
+        </form> */}
       </section>
       <section className='w-full flex border border-emerald-800 rounded-bl rounded-br bg-green-100/40 p-3 mt-2'>
         <div className='w-full flex justify-between text-sm text-neutral-800'>
