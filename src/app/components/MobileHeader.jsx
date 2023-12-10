@@ -10,7 +10,7 @@ const MobileHeader = async () => {
   const user = session?.user?.name
 
   return (
-    <div className='bg-emerald-50 border-b border-emerald-400 w-screen flex pt-6 pb-1 px-4 justify-between items-end'>
+    <div className='bg-emerald-50 border-b border-emerald-400 flex pt-6 pb-1 px-4 md:px-12 justify-between items-end'>
       <div className='flex items-end gap-2 w-full'>
         <Link href='/' className='mb-1'>
           <Image

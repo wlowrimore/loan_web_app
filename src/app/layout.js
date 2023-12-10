@@ -16,8 +16,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${nunito.className} w-screen h-screen mx-auto container`}>
-        <main>
+      <body className={`${nunito.className} w-full h-screen mx-auto`}>
+        <main className=''>
           <Providers>
             <MobileHeader />
             {children}
