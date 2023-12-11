@@ -23,7 +23,7 @@ const MobileHeader = async () => {
         <span className='text-xl flex items-end'>|</span>
         {session ? (
           <div className='flex w-full'>
-            <p className='flex items-end justify-between w-full text-sm'>{user}
+            <p className='flex items-end justify-between w-full text-sm'><Link href='/dashboard'>{user}</Link>
               <span className='text-emerald-600'><LogoutButton /></span>
             </p>
           </div>

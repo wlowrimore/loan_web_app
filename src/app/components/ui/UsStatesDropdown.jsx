@@ -3,6 +3,7 @@ const UsStatesDropdown = ({ handleOnStateSelect }) => {
     <div className='flex flex-col'>
       <label htmlFor='us-states' className='text-white font-semibold tracking-wide'>State/Province&nbsp;*</label>
       <select
+        required
         onChange={(e) => handleOnStateSelect(e.target.value)}
         name='us-states'
         className='w-fit px-2 border border-emerald-800 rounded outline-none bg-white'>

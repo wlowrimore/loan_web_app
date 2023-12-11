@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link';
 import DatePicker from 'react-datepicker'
 
 import { InputMask } from 'primereact/inputmask';
@@ -9,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import GIDPopup from '../../ui/GIDPopup';
 import UsStatesDropdown from '../../ui/UsStatesDropdown';
 
-const PersonalInfo = () => {
+const PersonalInfo = ({ onClick }) => {
   const [fullLegalName, setFullLegalName] = useState('')
   const [addressOne, setAddressOne] = useState('')
   const [addressTwo, setAddressTwo] = useState(null)
@@ -23,6 +22,20 @@ const PersonalInfo = () => {
   const [email, setEmail] = useState('')
   const [isOpen, setIsOpen] = useState(false);
 
+  const personalFormData = {
+    fullLegalName,
+    addressOne,
+    addressTwo,
+    city,
+    zipcode,
+    startDate,
+    ssn,
+    maritalSelected,
+    selectedState,
+    phone,
+    email
+  }
+
   const handleOnStateSelect = (selectedState) => {
     setSelectedState(selectedState)
     console.log('The state you selected is:', selectedState)
@@ -32,15 +45,10 @@ const PersonalInfo = () => {
     setMaritalSelected(value)
   }
 
-  const handlePersonalSubmit = (e) => {
-    e.preventDefault()
-    console.log('form submitted')
-  }
-
   return (
-    <div className=''>
+    <div>
       <h1 className='text-2xl font-bold text-white'>Personal Information</h1>
-      <form id='personal' onSubmit={handlePersonalSubmit} className='flex flex-col py-4 space-y-4'>
+      <form id='personal' className='flex flex-col py-4 space-y-4 w-full'>
         <div className='flex flex-col'>
           <label htmlFor='full-legal-name' className='text-white font-semibold tracking-wide'>Full Legal Name&nbsp;*</label>
           <input
@@ -55,6 +63,7 @@ const PersonalInfo = () => {
         <div className='flex flex-col'>
           <label htmlFor='date-of-birth' className='text-white font-semibold tracking-wide'>Date of Birth&nbsp;*</label>
           <DatePicker
+            required
             selected={startDate}
             value={startDate}
             onChange={(date) => setStartDate(date)}
@@ -69,6 +78,7 @@ const PersonalInfo = () => {
           <label htmlFor="ssn" className="text-white font-semibold tracking-wide">
             SSN / <span onClick={(e) => setIsOpen(true)} className='underline cursor-pointer'>GID?</span>&nbsp;*</label>
           <InputMask
+            required
             id="ssn"
             mask="999-99-9999"
             value={ssn}
@@ -83,6 +93,7 @@ const PersonalInfo = () => {
         <div className='flex flex-col'>
           <label htmlFor='marital-status' className='text-white font-semibold tracking-wide'>Marital Status&nbsp;*</label>
           <select
+            required
             value={maritalSelected}
             onChange={(e) => handleOnMaritalSelect(e.target.value)}
             name='marital-status'
@@ -113,7 +124,6 @@ const PersonalInfo = () => {
         <div className='flex flex-col'>
           <label htmlFor='address-two' className='text-white font-semibold tracking-wide'>Address Two&nbsp;&#40;optional&#41;</label>
           <input
-            required
             id='address-two'
             type='text'
             value={addressTwo}
@@ -171,7 +181,7 @@ const PersonalInfo = () => {
             className='px-2 outline-none'
           />
         </div>
-        <button type='submit' className='w-full py-1 px-2 bg-emerald-200 rounded font-semibold'>Continue to Employment</button>
+        <button onClick={onClick} className='w-full py-1 px-2 bg-emerald-200 rounded font-semibold'>Continue to Employment</button>
       </form>
     </div>
   )

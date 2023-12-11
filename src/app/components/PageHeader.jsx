@@ -3,7 +3,7 @@ import Logo from 'public/header-logo.svg'
 
 const PageHeader = () => {
   return (
-    <div className='h-full w-screen flex flex-col items-center px-4'>
+    <div className='h-full flex flex-col'>
       <div className='pt-8 pb-12 gap-2 flex items-center'>
         <Image
           src={Logo}
