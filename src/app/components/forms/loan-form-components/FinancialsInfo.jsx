@@ -89,9 +89,9 @@ const FinancialsInfo = ({ onClick }) => {
             />
           </div>
         </div>
-        <div className='flex flex-col space-y-2 pt-2 pb-4 bg-emerald-800 rounded-lg'>
-          <p className='mt-2 px-2 w-full text-sm text-emerald-50 font-semibold tracking-wide'>Enter the total debt amount for each item.  If none, please enter 0.</p>
-          <div className='flex flex-col pl-2'>
+        <div className='flex flex-col space-y-2 pt-2 pb-4 px-3 w-full bg-emerald-800 rounded-lg'>
+          <p className='mt-2 w-full text-sm text-emerald-50 font-semibold tracking-wide'>Enter the total debt amount for each item.  If none, please enter 0.</p>
+          <div className='flex flex-col'>
             <label htmlFor='credit-cards-monthly-debt' className='text-emerald-300 font-semibold tracking-wide'>Credit Cards</label>
             <div className='flex'>
               <h1 className='bg-white px-1'>$</h1>
@@ -100,11 +100,11 @@ const FinancialsInfo = ({ onClick }) => {
                 type='number'
                 value={ccMonthlyDebt}
                 onChange={(e) => setCcMonthlyDebt(e.target.value)}
-                className='px-2 outline-none'
+                className='px-2 outline-none w-full'
               />
             </div>
           </div>
-          <div className='flex flex-col pl-2'>
+          <div className='flex flex-col'>
             <label htmlFor='auto-loans-monthly-debt' className='text-emerald-300 font-semibold tracking-wide'>Auto Loans</label>
             <div className='flex'>
               <h1 className='bg-white px-1'>$</h1>
@@ -113,11 +113,11 @@ const FinancialsInfo = ({ onClick }) => {
                 type='number'
                 value={autoMonthlyDebt}
                 onChange={(e) => setAutoMonthlyDebt(e.target.value)}
-                className='px-2 outline-none'
+                className='px-2 outline-none w-full'
               />
             </div>
           </div>
-          <div className='flex flex-col pl-2'>
+          <div className='flex flex-col'>
             <label htmlFor='student-loans-monthly-debt' className='text-emerald-300 font-semibold tracking-wide'>Student Loans</label>
             <div className='flex'>
               <h1 className='bg-white px-1'>$</h1>
@@ -126,12 +126,12 @@ const FinancialsInfo = ({ onClick }) => {
                 type='number'
                 value={studentLoansMonthlyDebt}
                 onChange={(e) => setStudentLoansMonthlyDebt(e.target.value)}
-                className='px-2 outline-none'
+                className='px-2 outline-none w-full'
               />
             </div>
 
           </div>
-          <div className='flex flex-col pl-2'>
+          <div className='flex flex-col'>
             <label htmlFor='medical-monthly-debt' className='text-emerald-300 font-semibold tracking-wide'>Medical Bills</label>
             <div className='flex'>
               <h1 className='bg-white px-1'>$</h1>
@@ -140,11 +140,11 @@ const FinancialsInfo = ({ onClick }) => {
                 type='number'
                 value={medicalMonthlyDebt}
                 onChange={(e) => setMedicalMonthlyDebt(e.target.value)}
-                className='px-2 outline-none'
+                className='px-2 outline-none w-full'
               />
             </div>
           </div>
-          <div className='flex flex-col pl-2'>
+          <div className='flex flex-col'>
             <label htmlFor='irs-monthly-debt' className='text-emerald-300 font-semibold tracking-wide'>IRS</label>
             <div className='flex'>
               <h1 className='bg-white px-1'>$</h1>
@@ -153,7 +153,7 @@ const FinancialsInfo = ({ onClick }) => {
                 type='number'
                 value={irsMonthlyDebt}
                 onChange={(e) => setIRSMonthlyDebt(e.target.value)}
-                className='px-2 outline-none'
+                className='px-2 outline-none w-full'
               />
             </div>
           </div>
