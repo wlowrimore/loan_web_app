@@ -17,7 +17,24 @@ const EmploymentInfo = ({ onClick }) => {
   const [employersAddressOne, setEmployersAddressOne] = useState('')
   const [employersAddressTwo, setEmployersAddressTwo] = useState('')
   const [employersCity, setEmployersCity] = useState('')
+  const [selectedState, setSelectedState] = useState('')
   const [employersZipcode, setEmployersZipcode] = useState('')
+
+  const employmentFormData = {
+    employmentSelected,
+    employersName,
+    employersPhone,
+    startDate,
+    endDate,
+    jobTitle,
+    jobResponsibilites,
+    grossMonthlyIncome,
+    employersAddressOne,
+    employersAddressTwo,
+    employersCity,
+    selectedState,
+    employersZipcode
+  }
 
   const handleOnEmploymentSelect = (value) => {
     setEmploymentSelected(value)
@@ -74,31 +91,35 @@ const EmploymentInfo = ({ onClick }) => {
         <div className='flex'>
           <div className='flex flex-col'>
             <label htmlFor='start-date' className='text-white font-semibold tracking-wide'>Start Date&nbsp;*</label>
-            <DatePicker
-              required
-              selected={startDate}
-              value={startDate}
-              onChange={(date) => setStartDate(date)}
-              peekNextMonth
-              showMonthDropdown
-              showYearDropdown
-              dropdownMode="select"
-              className='outline-none px-2 w-4/5'
-            />
+            {typeof window !== 'undefined' && (
+              <DatePicker
+                required
+                selected={startDate}
+                value={startDate}
+                onChange={(date) => setStartDate(date)}
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                className='outline-none px-2 w-4/5'
+              />
+            )}
           </div>
           <div className='flex flex-col'>
             <label htmlFor='end-date' className='text-white font-semibold tracking-wide'>End Date&nbsp;*</label>
-            <DatePicker
-              required
-              selected={endDate}
-              value={endDate}
-              onChange={(date) => setEndDate(date)}
-              peekNextMonth
-              showMonthDropdown
-              showYearDropdown
-              dropdownMode="select"
-              className='outline-none px-2 w-4/5'
-            />
+            {typeof window !== 'undefined' && (
+              <DatePicker
+                required
+                selected={endDate}
+                value={endDate}
+                onChange={(date) => setEndDate(date)}
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                className='outline-none px-2 w-4/5'
+              />
+            )}
           </div>
         </div>
         <div className='flex gap-2'>

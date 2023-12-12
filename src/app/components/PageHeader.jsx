@@ -4,7 +4,7 @@ import Logo from 'public/header-logo.svg'
 const PageHeader = () => {
   return (
     <div className='h-full flex flex-col'>
-      <div className='pt-8 pb-12 gap-2 flex items-center'>
+      <div className='pt-8 pb-6 gap-2 flex items-center'>
         <Image
           src={Logo}
           alt='circled check mark'

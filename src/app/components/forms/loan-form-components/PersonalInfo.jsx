@@ -88,7 +88,9 @@ const PersonalInfo = ({ onClick }) => {
           />
         </div>
         {isOpen && (
-          <GIDPopup setIsOpen={setIsOpen} />
+          <div>
+            <GIDPopup setIsOpen={setIsOpen} />
+          </div>
         )}
         <div className='flex flex-col'>
           <label htmlFor='marital-status' className='text-white font-semibold tracking-wide'>Marital Status&nbsp;*</label>
