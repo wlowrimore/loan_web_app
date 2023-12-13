@@ -276,7 +276,7 @@ const FinancialsInfo = ({ onClick }) => {
             </textarea>
           )}
         </div>
-        <button onClick={onClick} className='w-full py-1 px-2 bg-emerald-200 rounded font-semibold'>Continue to Financials</button>
+        <button onClick={onClick} className='w-full py-1 px-2 bg-emerald-200 rounded font-semibold'>Continue to Loan Details</button>
       </form>
     </div>
   )

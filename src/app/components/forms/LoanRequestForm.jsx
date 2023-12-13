@@ -5,13 +5,14 @@ import Link from 'next/link';
 import PersonalInfo from './loan-form-components/PersonalInfo';
 import EmploymentInfo from './loan-form-components/EmploymentInfo';
 import FinancialsInfo from './loan-form-components/FinancialsInfo';
+import LoanDetails from './loan-form-components/LoanDetails';
 
 const LoanRequestForm = () => {
   // const components = [PersonalInfo, EmploymentInfo]
   const [currentComponentIndex, setCurrentComponentIndex] = useState(0)
 
   const handleClick = () => {
-    setCurrentComponentIndex((prevIndex) => (prevIndex + 1) % 3)
+    setCurrentComponentIndex((prevIndex) => (prevIndex + 1) % 4)
   }
 
   const handleOnSubmit = (e) => {
@@ -21,7 +22,10 @@ const LoanRequestForm = () => {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      window.scrollTo(0, 0);
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     }
   }, [currentComponentIndex]);
 
@@ -31,17 +35,18 @@ const LoanRequestForm = () => {
   return (
     <>
       <div>
-        <form onSubmit={handleOnSubmit} className='w-full border border-emerald-800 rounded-tl rounded-tr bg-green-800/60 py-2 px-4 mt-8'>
+        <form onSubmit={handleOnSubmit} className='w-full border border-emerald-800 rounded-tl rounded-tr bg-green-800/60 pt-2 pb-4 px-4 mt-8'>
           {currentComponentIndex === 0 ? (
             <PersonalInfo onClick={handleClick} />
           ) : currentComponentIndex === 1 ? (
             <EmploymentInfo onClick={handleClick} />
-          ) : (
+          ) : currentComponentIndex === 2 ? (
             <FinancialsInfo onClick={handleClick} />
-          )}
-          <div>
+          ) : <LoanDetails onClick={handleClick} />
+          }
+          {/* <div>
             <button>Submit Loan Information</button>
-          </div>
+          </div> */}
         </form>
 
         <div className='w-full flex border border-emerald-800 rounded-bl rounded-br bg-green-100/40 p-3 mt-2'>
