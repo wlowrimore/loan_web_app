@@ -69,16 +69,16 @@ const PersonalInfo = ({ onClick }) => {
       <h1 className='text-2xl font-bold text-white'>Personal Information</h1>
       <div className='flex flex-col justify-between bg-emerald-100 py-1 px-2 border border-emerald-800 rounded mt-2 text-xs text-emerald-950'>
         <label htmlFor='citizenship' className='text-emerald-950 text-lg font-semibold tracking-wide'>Do you have proof of U.S. citizenship?</label>
-        <div className='flex justify-between my-2'>
-          <ul className='flex flex-col'>
+        <div className='w-full grid grid-cols-3 gap-2 my-2'>
+          <ul className='flex flex-col px-2'>
             <li>Birth Certificate</li>
             <li>U.S. Passport</li>
           </ul>
-          <ul className='flex flex-col'>
+          <ul className='flex flex-col px-2'>
             <li>Form N-560/561</li>
             <li>Form N-550/551</li>
           </ul>
-          <ul className='flex flex-col'>
+          <ul className='flex flex-col px-2'>
             <li>CRBA</li>
             <li>Early Public Records</li>
           </ul>

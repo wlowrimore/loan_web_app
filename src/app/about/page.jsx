@@ -4,14 +4,16 @@ import Banner from '/public/handshake.webp'
 
 const About = () => {
   return (
-    <div>
-      <PageHeader />
+    <div className='flex flex-col'>
+      <div className='flex justify-center w-full px-4 my-6'>
+        <PageHeader />
+      </div>
       <Image
         src={Banner}
         alt='two people shaking hands'
-        width={500}
-        height={500}
-        className='-mt-5 opacity-80'
+        width={300}
+        height={300}
+        className='w-full flex justify-center opacity-70 border-b shadow-lg'
       />
       <article className='px-4 py-6 text-justify'>
         <strong>Ascension Lending Group</strong> is not your typical lender.  Our mission is to lorem ipsum our way into your wallet. Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque. Pharetra vel turpis nunc eget. Consectetur libero id faucibus nisl tincidunt eget. Enim tortor at auctor urna nunc id cursus. Id semper risus in hendrerit gravida. Amet facilisis magna etiam tempor orci eu lobortis. Aliquet risus feugiat in ante. Maecenas accumsan lacus vel facilisis volutpat est velit. Faucibus vitae aliquet nec ullamcorper sit amet risus nullam. Ante metus dictum at tempor commodo ullamcorper a lacus vestibulum. Lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque. Hendrerit gravida rutrum quisque non tellus orci ac. Id diam vel quam elementum. Quisque id diam vel quam elementum. Sed sed risus pretium quam vulputate dignissim. Dolor sit amet consectetur adipiscing. Dolor sit amet consectetur adipiscing.

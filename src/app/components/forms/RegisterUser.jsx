@@ -40,8 +40,8 @@ const RegisterUser = () => {
   }
 
   return (
-    <form onSubmit={handleFormSubmit} className='flex flex-col space-y-8 p-6 bg-gradient-to-b from-emerald-100 to-emerald-50 rounded-lg'>
-      <h1 className='text-xl font-bold text-emerald-800'>Create Your Account</h1>
+    <form onSubmit={handleFormSubmit} className='flex flex-col space-y-4 pt-2 pb-4 px-3 mt-4 w-full bg-emerald-800 rounded-lg'>
+      <h1 className='text-xl font-bold text-emerald-200 mt-2'>Create Your Account</h1>
       <input
         required
         value={name}
@@ -49,7 +49,7 @@ const RegisterUser = () => {
         type='text'
         id='name'
         placeholder='Full Name'
-        className='w-full border-b border-neutral-500 bg-transparent outline-none focus:placeholder:text-emerald-700 focus:placeholder:opacity-70 focus:placeholder:translate-x-[17.5rem] focus:placeholder:text-xs focus:placeholder:transition focus:placeholder:duration-[600ms] focus:placeholder:ease-out'
+        className='w-full h-[2rem] text-neutral-800 text-lg px-2 outline-none placeholder:text-emerald-800 focus:placeholder:text-emerald-950 focus:placeholder:opacity-70 focus:placeholder:translate-x-[16.5rem] focus:placeholder:text-xs focus:placeholder:transition focus:placeholder:duration-[600ms] focus:placeholder:ease-out'
       />
 
       <input
@@ -59,7 +59,7 @@ const RegisterUser = () => {
         type='email'
         id='email'
         placeholder='Email'
-        className='w-full border-b border-neutral-500 bg-transparent outline-none focus:placeholder:text-emerald-700 focus:placeholder:opacity-70 focus:placeholder:translate-x-[17.5rem] focus:placeholder:text-xs focus:placeholder:transition focus:placeholder:duration-[600ms] focus:placeholder:ease-out'
+        className='w-full h-[2rem] text-neutral-800 text-lg px-2 outline-none placeholder:text-emerald-800 focus:placeholder:text-emerald-950 focus:placeholder:opacity-70 focus:placeholder:translate-x-[18rem] focus:placeholder:text-xs focus:placeholder:transition focus:placeholder:duration-[600ms] focus:placeholder:ease-out'
       />
 
       <input
@@ -69,12 +69,12 @@ const RegisterUser = () => {
         type='password'
         id='password'
         placeholder='Password'
-        className='w-full border-b border-neutral-500 bg-transparent outline-none focus:placeholder:text-emerald-700 focus:placeholder:opacity-70 focus:placeholder:translate-x-[16rem] focus:placeholder:text-xs focus:placeholder:transition focus:placeholder:duration-[600ms] focus:placeholder:ease-out'
+        className='w-full h-[2rem] text-neutral-800 text-lg px-2 outline-none placeholder:text-emerald-800 focus:placeholder:text-emerald-950 focus:placeholder:opacity-70 focus:placeholder:translate-x-[16.5rem] focus:placeholder:text-xs focus:placeholder:transition focus:placeholder:duration-[600ms] focus:placeholder:ease-out'
       />
       {error && <Alert>{error}</Alert>}
       <button className='w-full bg-emerald-300 font-bold py-2 px-6 rounded outline-none'>Create Account</button>
       <div className='text-center'>
-        <button onClick={(e) => signIn()} className='text-sm'>Already registered? <span className='text-indigo-500 underline'>Sign in</span>.</button>
+        <button onClick={(e) => signIn()} className='text-sm text-white'>Already registered? <span className='text-cyan-400'>Sign in</span>.</button>
       </div>
     </form>
   )

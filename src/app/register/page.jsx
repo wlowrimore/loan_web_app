@@ -4,7 +4,7 @@ import PageHeader from '../components/PageHeader'
 
 const RegisterPage = () => {
   return (
-    <div className='h-full w-screen flex flex-col items-center px-4'>
+    <div className='h-full w-screen flex flex-col items-center mt-[1.5rem] px-4'>
       <PageHeader />
       <div className='shadow-xl w-full mx-4 pb-1 md:w-1/3'>
         <RegisterUser />
