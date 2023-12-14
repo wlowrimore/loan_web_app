@@ -1,10 +1,10 @@
+import Loading from "./components/ui/loading/Loading"
+
 const loading = () => {
   return (
-    <section className='p-24'>
-      <div className='container'>
-        <h2 className='text-4xl'>Loading...</h2>
-      </div>
-    </section>
+    <div>
+      <Loading />
+    </div>
   )
 }
 
