@@ -3,8 +3,10 @@ import { authOptions } from "../api/auth/[...nextauth]/route"
 import { redirect } from "next/navigation"
 import DashboardContent from "../components/dashboard/DashboardContent"
 import DashboardNavBar from "../components/dashboard/DashboardNavBar"
+import { wait } from "../utils/wait"
 
 const Dashboard = async () => {
+  await wait(2000)
   const session = await getServerSession(authOptions)
   const user = session?.user?.name
 
@@ -18,7 +20,7 @@ const Dashboard = async () => {
         <DashboardNavBar />
         <div className='bg-emerald-800 -mx-4 px-4 border-b border-emerald-800 shadow-lg'>
           <h1 className='text-3xl text-emerald-100 -mb-2 py-2 font-bold'>Dashboard</h1>
-          <p className='text-emerald-950 font-semibold pt-2 pb-1 rounded-tl-xl bg-emerald-400/50 -mr-4 ml-16 pl-2 tracking-wider capitalize'>
+          <p className='text-emerald-950 font-semibold pt-2 pb-1 rounded-tl-xl bg-emerald-400/50 -mr-4 ml-16 pl-3 tracking-wider capitalize'>
             {user}
           </p>
         </div>
