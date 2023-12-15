@@ -3,13 +3,34 @@
 import { useState } from "react";
 import TodaysDate from "../../ui/TodaysDate";
 
-const LoanDetails = ({ onClick }) => {
+const LoanDetailsForm = ({ onSave }) => {
   const [loanAmountRequested, setLoanAmountRequested] = useState("");
   const [loanPurposeSelected, setLoanPurposeSelected] = useState("");
   const [isOtherSelected, setIsOtherSelected] = useState(false)
+  const [otherSelectedDesc, setOtherSelectedDesc] = useState('')
   const [termLengthSelected, setTermLengthSelected] = useState("");
-  const [isChecked, setIsChecked] = useState(false)
-  const [signature, setSignature] = useState('')
+  const [isConsentChecked, setIsConsentChecked] = useState(false)
+  const [applicantSignature, setApplicantSignature] = useState('')
+
+  const handleLoanDetailsSaveAndSwitch = (e) => {
+    e.preventDefault()
+    const today = new Date()
+    const formattedDate = today.toLocaleDateString()
+    const dateSigned = formattedDate
+
+    const loanDetailsData = {
+      loanAmountRequested,
+      loanPurposeSelected,
+      isOtherSelected,
+      otherSelectedDesc,
+      termLengthSelected,
+      isConsentChecked,
+      signature,
+      applicantSignature,
+      dateSigned
+    }
+    onSave(loanDetailsData)
+  }
 
   const handleOnLoanPurposeSelect = (value) => {
     setLoanPurposeSelected(value);
@@ -26,7 +47,7 @@ const LoanDetails = ({ onClick }) => {
   };
 
   const handleConsentCheckBoxChange = () => {
-    setIsChecked(!isChecked)
+    setIsConsentChecked(!isConsentChecked)
   }
 
   return (
@@ -79,7 +100,12 @@ const LoanDetails = ({ onClick }) => {
         {isOtherSelected === true ? (
           <div className='flex flex-col p-2 text-sm bg-emerald-800 border border-emerald-800 rounded text-emerald-50'>
             <h3 className='text-xs text-emerald-200 font-semibold italic pb-2'>Please briefly describe a reason for this loan.</h3>
-            <textarea id='other-reason' rows='3' className='p-1 text-emerald-950 border-emerald-800 rounded outline-none'></textarea>
+            <textarea
+              id='other-reason'
+              rows='3'
+              value={otherSelectedDesc}
+              onChange={(e) => setOtherSelectedDesc(e.target.value)}
+              className='p-1 text-emerald-950 border-emerald-800 rounded outline-none'></textarea>
           </div>
         ) : null}
         <div className="flex flex-col">
@@ -107,7 +133,7 @@ const LoanDetails = ({ onClick }) => {
         <div className="flex gap-1">
           <input
             type="checkbox"
-            checked={isChecked}
+            checked={isConsentChecked}
             onChange={() => {
               handleConsentCheckBoxChange("checked");
             }}
@@ -122,22 +148,23 @@ const LoanDetails = ({ onClick }) => {
               required
               id="signature"
               type="text"
-              value={signature}
-              onChange={(e) => setSignature(e.target.value)}
+              value={applicantSignature}
+              onChange={(e) => setApplicantSignature(e.target.value)}
               className="px-2 outline-none w-full"
             />
             <TodaysDate />
           </div>
         </div>
         <button
-          onClick={onClick}
+          type='button'
+          onClick={handleLoanDetailsSaveAndSwitch}
           className="w-full py-1 px-2 bg-emerald-200 rounded font-semibold"
         >
-          Placeholder Button Text
+          Submit Loan Application
         </button>
       </form>
     </div>
   );
 };
 
-export default LoanDetails;
+export default LoanDetailsForm;

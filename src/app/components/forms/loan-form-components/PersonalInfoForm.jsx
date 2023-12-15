@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 
 import { InputMask } from 'primereact/inputmask';
@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import GIDPopup from '../../ui/GIDPopup';
 import UsStatesDropdown from '../../ui/UsStatesDropdown';
 
-const PersonalInfo = ({ onClick }) => {
+const PersonalInfoForm = ({ onSave }) => {
   const [fullLegalName, setFullLegalName] = useState('')
   const [addressOne, setAddressOne] = useState('')
   const [addressTwo, setAddressTwo] = useState(null)
@@ -25,19 +25,28 @@ const PersonalInfo = ({ onClick }) => {
   const [citizenshipCheckedNo, setCitizenshipCheckedNo] = useState(false)
   const [isCitizen, setIsCitizen] = useState(null)
 
-  // const personalFormData = {
-  //   fullLegalName,
-  //   addressOne,
-  //   addressTwo,
-  //   city,
-  //   zipcode,
-  //   startDate,
-  //   ssn,
-  //   maritalSelected,
-  //   selectedState,
-  //   phone,
-  //   email
-  // }
+  const dateOfBirth = startDate
+  const maritalStatus = maritalSelected
+  const usCitizen = isCitizen
+
+  const handlePersonalInfoSaveAndSwitch = (e) => {
+    e.preventDefault()
+    const personalFormData = {
+      fullLegalName,
+      addressOne,
+      addressTwo,
+      city,
+      zipcode,
+      dateOfBirth,
+      ssn,
+      maritalStatus,
+      selectedState,
+      phone,
+      email,
+      usCitizen
+    }
+    onSave(personalFormData)
+  }
 
   const handleOnStateSelect = (selectedState) => {
     setSelectedState(selectedState)
@@ -49,6 +58,7 @@ const PersonalInfo = ({ onClick }) => {
   }
 
   const handleCitizenshipCheckBoxChange = (citizenshipCheckboxType) => {
+    console.log('Before:', citizenshipCheckedYes, citizenshipCheckedNo, isCitizen)
     if (citizenshipCheckboxType === 'yes') {
       setCitizenshipCheckedYes(true)
       setCitizenshipCheckedNo(false)
@@ -62,10 +72,11 @@ const PersonalInfo = ({ onClick }) => {
       setCitizenshipCheckedNo(false)
       setIsCitizen(null)
     }
+    console.log('After:', citizenshipCheckedYes, citizenshipCheckedNo, isCitizen)
   }
 
   return (
-    <div>
+    <form>
       <h1 className='text-2xl font-bold text-white'>Personal Information</h1>
       <div className='flex flex-col justify-between bg-emerald-100 py-1 px-2 border border-emerald-800 rounded mt-2 text-xs text-emerald-950'>
         <label htmlFor='citizenship' className='text-emerald-950 text-lg font-semibold tracking-wide'>Do you have proof of U.S. citizenship?</label>
@@ -106,7 +117,7 @@ const PersonalInfo = ({ onClick }) => {
         </div>
       </div>
       {isCitizen === true ? (
-        <form id='personal' className='flex flex-col py-4 space-y-4 w-full'>
+        <div id='personal' className='flex flex-col py-4 space-y-4 w-full'>
           <div className='flex flex-col'>
             <label htmlFor='full-legal-name' className='text-white font-semibold tracking-wide'>Full Legal Name&nbsp;*</label>
             <input
@@ -240,8 +251,8 @@ const PersonalInfo = ({ onClick }) => {
               className='px-2 outline-none'
             />
           </div>
-          <button onClick={onClick} className='w-full py-1 px-2 bg-emerald-200 rounded font-semibold'>Continue to Employment</button>
-        </form>
+          <button type='button' onClick={handlePersonalInfoSaveAndSwitch} className='w-full py-1 px-2 bg-emerald-200 rounded font-semibold'>Continue to Employment</button>
+        </div>
       ) : isCitizen === false ? (
         <div className='bg-emerald-100 border border-emerald-800 rounded p-2 mt-1'>
           <h2 className='text-sm text-red-700'>Our apologies.  You must be a U.S. citizen to obtain a loan with Ascension Lending Group.</h2>
@@ -249,8 +260,8 @@ const PersonalInfo = ({ onClick }) => {
       ) : (
         null
       )}
-    </div>
+    </form>
   )
 }
 
-export default PersonalInfo
+export default PersonalInfoForm

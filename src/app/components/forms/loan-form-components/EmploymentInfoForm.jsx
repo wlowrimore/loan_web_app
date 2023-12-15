@@ -5,12 +5,13 @@ import { InputMask } from 'primereact/inputmask'
 import DatePicker from 'react-datepicker'
 import UsStatesDropdown from '../../ui/UsStatesDropdown'
 
-const EmploymentInfo = ({ onClick }) => {
+const EmploymentInfoForm = ({ onSave }) => {
   const [employmentSelected, setEmploymentSelected] = useState('')
   const [employersName, setEmployersName] = useState('')
   const [employersPhone, setEmployersPhone] = useState('')
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
+  const [isCurrentPosition, setIsCurrentPosition] = useState(false)
   const [jobTitle, setJobTitle] = useState('')
   const [jobResponsibilites, setJobResponsibilities] = useState('')
   const [grossMonthlyIncome, setGrossMonthlyIncome] = useState('')
@@ -20,20 +21,25 @@ const EmploymentInfo = ({ onClick }) => {
   const [selectedState, setSelectedState] = useState('')
   const [employersZipcode, setEmployersZipcode] = useState('')
 
-  const employmentFormData = {
-    employmentSelected,
-    employersName,
-    employersPhone,
-    startDate,
-    endDate,
-    jobTitle,
-    jobResponsibilites,
-    grossMonthlyIncome,
-    employersAddressOne,
-    employersAddressTwo,
-    employersCity,
-    selectedState,
-    employersZipcode
+  const handleEmploymentInfoSaveAndSwitch = (e) => {
+    e.preventDefault()
+    const employmentFormData = {
+      employmentSelected,
+      employersName,
+      employersPhone,
+      startDate,
+      endDate,
+      isCurrentPosition,
+      jobTitle,
+      jobResponsibilites,
+      grossMonthlyIncome,
+      employersAddressOne,
+      employersAddressTwo,
+      employersCity,
+      selectedState,
+      employersZipcode
+    }
+    onSave(employmentFormData)
   }
 
   const handleOnEmploymentSelect = (value) => {
@@ -125,7 +131,9 @@ const EmploymentInfo = ({ onClick }) => {
         <div className='flex gap-2'>
           <input
             type='checkbox'
-            name='checkbox'
+            name='current-position'
+            value={isCurrentPosition}
+            onChange={(e) => setIsCurrentPosition(!isCurrentPosition)}
             selected
           />
           <span className='text-white text-sm'>Currently employed here</span>
@@ -208,10 +216,10 @@ const EmploymentInfo = ({ onClick }) => {
             className='px-2 outline-none'
           />
         </div>
-        <button onClick={onClick} className='w-full py-1 px-2 bg-emerald-200 rounded font-semibold'>Continue to Financials</button>
+        <button type='button' onClick={handleEmploymentInfoSaveAndSwitch} className='w-full py-1 px-2 bg-emerald-200 rounded font-semibold'>Continue to Financials</button>
       </form>
     </div>
   )
 }
 
-export default EmploymentInfo
+export default EmploymentInfoForm
