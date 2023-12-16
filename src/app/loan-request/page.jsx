@@ -8,7 +8,7 @@ const LoanRequestPage = async () => {
   return (
     <div className='w-full flex flex-col px-4 pb-6'>
       <PageHeader />
-      <TimelineComponent />
+      {/* <TimelineComponent /> */}
       <LoanRequestForm />
     </div>
   )

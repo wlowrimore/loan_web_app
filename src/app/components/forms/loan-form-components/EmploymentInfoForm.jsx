@@ -87,7 +87,6 @@ const EmploymentInfoForm = ({ onSave }) => {
             required
             id='employers-phone'
             mask='(999) 999-9999'
-            placeholder='(123) 456-7890'
             type='tel'
             value={employersPhone}
             onChange={(e) => setEmployersPhone(e.target.value)}

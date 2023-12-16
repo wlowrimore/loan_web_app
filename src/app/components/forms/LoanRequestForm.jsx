@@ -7,27 +7,40 @@ import EmploymentInfoForm from './loan-form-components/EmploymentInfoForm';
 import FinancialsInfoForm from './loan-form-components/FinancialsInfoForm';
 import LoanDetailsForm from './loan-form-components/LoanDetailsForm';
 import Submitted from '../ui/Submitted';
+import TimelineComponent from '../ui/TimelineComponent';
 
 const LoanRequestForm = () => {
   const [personalInfo, setPersonalInfo] = useState({});
   const [employmentInfo, setEmploymentInfo] = useState({});
   const [financialsInfo, setFinancialsInfo] = useState({});
   const [loanDetails, setLoanDetails] = useState({});
+
+  const [isPersonalInfoCompleted, setIsPersonalInfoCompleted] = useState(false)
+  const [isEmploymentInfoCompleted, setIsEmploymentInfoCompleted] = useState(false)
+  const [isFinancialsInfoCompleted, setIsFinancialsInfoCompleted] = useState(false)
+  const [isLoanDetailsCompleted, setIsLoanDetailsCompleted] = useState(false)
+  const [isRequestSubmitted, setIsRequestSubmitted] = useState(false)
+
   const [currentComponentIndex, setCurrentComponentIndex] = useState(0)
 
   const handlePersonalInfoSubmit = (data) => {
+    setIsPersonalInfoCompleted(true)
     setPersonalInfo(data)
     setCurrentComponentIndex(1)
   }
   const handleEmploymentInfoSubmit = (data) => {
+    setIsEmploymentInfoCompleted(true)
     setEmploymentInfo(data)
     setCurrentComponentIndex(2)
   }
   const handleFinancialsInfoSubmit = (data) => {
+    setIsFinancialsInfoCompleted(true)
     setFinancialsInfo(data)
     setCurrentComponentIndex(3)
   }
   const handleLoanDetailsSubmit = (data) => {
+    setIsLoanDetailsCompleted(true)
+    setIsRequestSubmitted(true)
     setLoanDetails(data)
     setCurrentComponentIndex(4)
   }
@@ -61,6 +74,13 @@ const LoanRequestForm = () => {
 
   return (
     <>
+      <TimelineComponent
+        isPersonalInfoCompleted={isPersonalInfoCompleted}
+        isEmploymentInfoCompleted={isEmploymentInfoCompleted}
+        isFinancialsInfoCompleted={isFinancialsInfoCompleted}
+        isLoanDetailsCompleted={isLoanDetailsCompleted}
+        isRequestSubmitted={isRequestSubmitted}
+      />
       <div className='w-full border border-emerald-800 rounded-tl rounded-tr bg-green-800/60 pt-2 pb-4 px-4 mt-8'>
         {renderCurrentForm()}
       </div>
