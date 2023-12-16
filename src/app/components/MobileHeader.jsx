@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Logo from 'public/header-logo.svg'
+import Logo from 'public/eagle-logo.webp'
 import { LoginButton, LogoutButton, SignUpButton } from './Auth'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../api/auth/[...nextauth]/route'
@@ -15,7 +15,7 @@ const MobileHeader = async () => {
         <Link href='/' className='mb-1'>
           <Image
             src={Logo}
-            alt='circled check mark'
+            alt='eagle-silhouette'
             width={28}
             height={28}
           />

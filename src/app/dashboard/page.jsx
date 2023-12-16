@@ -15,7 +15,7 @@ const Dashboard = async () => {
   }
 
   return (
-    <div className='w-full h-full flex flex-col pb-4 px-4 bg-gradient-to-t from-green-800 to-white'>
+    <div className='w-full h-full flex flex-col pb-4 px-4'>
       <div className='w-full leading-tight mb-2 bg-gradient-to-b from-emerald-800 to-emerald-500 bg-clip-text text-transparent'>
         <DashboardNavBar />
         <div className='bg-emerald-800 -mx-4 px-4 border-b border-emerald-800 shadow-lg'>

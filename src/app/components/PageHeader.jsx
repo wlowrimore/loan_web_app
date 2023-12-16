@@ -1,5 +1,5 @@
 import Image from "next/image"
-import Logo from 'public/header-logo.svg'
+import Logo from 'public/eagle-logo.webp'
 
 const PageHeader = () => {
   return (
@@ -7,7 +7,7 @@ const PageHeader = () => {
       <div className='pt-8 pb-6 gap-2 flex items-center'>
         <Image
           src={Logo}
-          alt='circled check mark'
+          alt='eagle-silhouette'
           width={60}
           height={60}
         />
