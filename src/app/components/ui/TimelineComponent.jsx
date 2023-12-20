@@ -5,8 +5,8 @@ import { UserCircleGear, CurrencyCircleDollar, Globe, Question, CheckCircle, Cir
 const TimelineComponent = ({
   isPersonalInfoCompleted,
   isEmploymentInfoCompleted,
-  isFinancialsInfoCompleted,
-  isLoanDetailsCompleted,
+  isFinancialInfoCompleted,
+  isLoanDetailsInfoCompleted,
   isRequestSubmitted,
 }) => {
   return (
@@ -42,7 +42,7 @@ const TimelineComponent = ({
         {/* <p className='text-[.55rem] relative top-1'>financials</p> */}
         <div className='flex items-center w-full'>
           <div className='bg-neutral-700 h-[.063rem] w-full' />
-          {isFinancialsInfoCompleted ? (
+          {isFinancialInfoCompleted ? (
             <span><CurrencyCircleDollar size={20} color="#059669" className='bg-emerald-600 rounded-full' /></span>
           ) : (
             <span><CurrencyCircleDollar size={24} color="#059669" /></span>
@@ -55,7 +55,7 @@ const TimelineComponent = ({
         {/* <p className='text-[.55rem] relative top-1'>loan</p> */}
         <div className='flex items-center w-full'>
           <div className='bg-neutral-700 h-[.063rem] w-full'></div>
-          {isLoanDetailsCompleted ? (
+          {isLoanDetailsInfoCompleted ? (
             <span><Question size={20} color="#059669" className='bg-emerald-600 rounded-full' /></span>
           ) : (
             <span><Question size={24} color="#059669" /></span>

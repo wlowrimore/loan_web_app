@@ -25,6 +25,11 @@ const PersonalInfoForm = ({ onSave }) => {
   const [citizenshipCheckedNo, setCitizenshipCheckedNo] = useState(false)
   const [isCitizen, setIsCitizen] = useState(null)
 
+  const [personalInfo, setPersonalInfo] = useState({});
+  const [isPersonalInfoCompleted, setIsPersonalInfoCompleted] = useState(false)
+
+  const [currentComponentIndex, setCurrentComponentIndex] = useState(0)
+
   const dateOfBirth = startDate
   const maritalStatus = maritalSelected
   const usCitizen = isCitizen
@@ -58,7 +63,6 @@ const PersonalInfoForm = ({ onSave }) => {
   }
 
   const handleCitizenshipCheckBoxChange = (citizenshipCheckboxType) => {
-    console.log('Before:', citizenshipCheckedYes, citizenshipCheckedNo, isCitizen)
     if (citizenshipCheckboxType === 'yes') {
       setCitizenshipCheckedYes(true)
       setCitizenshipCheckedNo(false)
@@ -72,8 +76,12 @@ const PersonalInfoForm = ({ onSave }) => {
       setCitizenshipCheckedNo(false)
       setIsCitizen(null)
     }
-    console.log('After:', citizenshipCheckedYes, citizenshipCheckedNo, isCitizen)
   }
+  // const handlePersonalInfoSaveAndSwitch = (data) => {
+  //   setIsPersonalInfoCompleted(true)
+  //   setPersonalInfo(data)
+  //   setCurrentComponentIndex()
+  // }
 
   return (
     <form>

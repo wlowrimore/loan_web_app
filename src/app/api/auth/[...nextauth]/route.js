@@ -39,7 +39,7 @@ export const authOptions = {
           }
 
           return {
-            id: user.id + '',
+            id: user.id,
             email: user.email,
             name: user.name,
             randomKey: 'Jazz'

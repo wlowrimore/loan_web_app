@@ -15,4 +15,85 @@ model User {
   email    String @unique
   password String
   name     String
+
+  personalInfo    PersonalInfo[]
+  employmentInfo  EmploymentInfo[]
+  financialInfo   FinancialInfo[]
+  loanDetailsInfo LoanDetailsInfo[]
+}
+
+model PersonalInfo {
+  id              Int      @id @default(autoincrement())
+  full_legal_name String
+  date_of_birth   DateTime
+  ssn             String
+  marital_status  String
+  address_one     String
+  address_two     String?
+  city            String
+  selected_state  String
+  zipcode         String
+  phone           String
+  email           String
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique
+}
+
+model EmploymentInfo {
+  id                    Int       @id @default(autoincrement())
+  employment_selected   String
+  employers_name        String
+  employers_phone       String
+  start_date            DateTime
+  end_date              DateTime?
+  is_current_position   Boolean?
+  job_title             String
+  job_responsibilities  String?
+  gross_monthly_income  String
+  employers_address_one String
+  employers_address_two String?
+  employers_city        String
+  selected_state        String
+  employers_zipcode     String
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique
+}
+
+model FinancialInfo {
+  id                         Int     @id @default(autoincrement())
+  housing_type_selected      String
+  housing_monthly_payment    String
+  cc_monthly_debt            String
+  auto_monthly_debt          String
+  student_loans_monthly_debt String
+  medical_monthly_debt       String
+  irs_monthly_debt           String
+  bank_name                  String
+  bank_account_type_selected String
+  bank_account_number        String
+  bank_routing_number        String
+  assets                     Boolean
+  asset_desc                 String?
+  liabilities                Boolean
+  liabilites_desc            String?
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique
+}
+
+model LoanDetailsInfo {
+  id                    Int      @id @default(autoincrement())
+  loan_amount_requested String
+  loan_purpose_selected String
+  is_other_selected     Boolean
+  other_selected_desc   String?
+  term_length_selected  String
+  is_consent_checked    Boolean
+  applicant_signature   String
+  date_signed           DateTime
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique
 }

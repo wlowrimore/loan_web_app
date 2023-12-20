@@ -5,7 +5,7 @@ import { useState } from 'react'
 // import DatePicker from 'react-datepicker'
 // import UsStatesDropdown from '../../ui/UsStatesDropdown'
 
-const FinancialsInfoForm = ({ onSave }) => {
+const FinancialInfoForm = ({ onSave }) => {
   const [housingTypeSelected, setHousingTypeSelected] = useState('')
   const [housingMonthlyPayment, setHousingMonthlyPayment] = useState('')
   const [ccMonthlyDebt, setCcMonthlyDebt] = useState('')
@@ -29,9 +29,9 @@ const FinancialsInfoForm = ({ onSave }) => {
   const assets = isAsset
   const liabilities = isLiability
 
-  const handleFinancialsInfoSaveAndSwitch = (e) => {
+  const handleFinancialInfoSaveAndSwitch = (e) => {
     e.preventDefault()
-    const financialsFormData = {
+    const financialFormData = {
       housingTypeSelected,
       housingMonthlyPayment,
       ccMonthlyDebt,
@@ -45,9 +45,10 @@ const FinancialsInfoForm = ({ onSave }) => {
       bankRoutingNumber,
       assets,
       assetDesc,
-      liabilities
+      liabilities,
+      liabilitiesDesc
     }
-    onSave(financialsFormData)
+    onSave(financialFormData)
   }
 
   const handleOnHousingTypeSelect = (value) => {
@@ -300,10 +301,10 @@ const FinancialsInfoForm = ({ onSave }) => {
             </textarea>
           )}
         </div>
-        <button type='button' onClick={handleFinancialsInfoSaveAndSwitch} className='w-full py-1 px-2 bg-emerald-200 rounded font-semibold'>Continue to Loan Details</button>
+        <button type='button' onClick={handleFinancialInfoSaveAndSwitch} className='w-full py-1 px-2 bg-emerald-200 rounded font-semibold'>Continue to Loan Details</button>
       </form>
     </div>
   )
 }
 
-export default FinancialsInfoForm
+export default FinancialInfoForm
