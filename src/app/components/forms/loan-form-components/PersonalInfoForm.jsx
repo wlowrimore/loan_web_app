@@ -11,7 +11,7 @@ import UsStatesDropdown from '../../ui/UsStatesDropdown';
 const PersonalInfoForm = ({ onSave }) => {
   const [fullLegalName, setFullLegalName] = useState('')
   const [addressOne, setAddressOne] = useState('')
-  const [addressTwo, setAddressTwo] = useState(null)
+  const [addressTwo, setAddressTwo] = useState("Not Applicable")
   const [city, setCity] = useState('')
   const [zipcode, setZipcode] = useState('')
   const [startDate, setStartDate] = useState(new Date())

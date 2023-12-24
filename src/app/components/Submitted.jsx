@@ -1,6 +1,4 @@
-import Link from 'next/link'
 import { CheckCircle } from '@phosphor-icons/react'
-import Image from 'next/image'
 
 const Submitted = () => {
   return (

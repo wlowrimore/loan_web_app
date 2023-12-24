@@ -29,8 +29,13 @@ const LoanRequestForm = () => {
 
   const handlePersonalInfoSubmit = (data) => {
     setIsPersonalInfoCompleted(true);
-    setPersonalInfo(data);
-    setCurrentComponentIndex(1);
+    setPersonalInfo(data)
+
+    if (currentComponentIndex < 3) {
+      setCurrentComponentIndex(currentComponentIndex + 1)
+    } else {
+      setCurrentComponentIndex(4);
+    }
   };
   const handleEmploymentInfoSubmit = (data) => {
     setIsEmploymentInfoCompleted(true);
@@ -111,7 +116,7 @@ const LoanRequestForm = () => {
               financialInfo,
               loanDetailsInfo,
             }}
-            onSave={handleConfirmAndSubmit}
+            onSave={handlePersonalInfoSubmit}
           />
         );
       case 5:

@@ -16,6 +16,7 @@ const SignInForm = () => {
   const callbackUrl = (router.query?.callbackUrl) ?? '/dashboard'
 
   const handleFormSubmit = async (e) => {
+
     e.preventDefault()
     try {
       const res = await signIn('credentials', {
@@ -39,7 +40,7 @@ const SignInForm = () => {
   return (
     <>
       <form onSubmit={handleFormSubmit} className='flex flex-col space-y-4 pt-2 pb-4 px-3 mt-4 w-full bg-emerald-800 rounded-lg'>
-        <h1 className='text-xl font-bold text-emerald-200 mt-2'>Welcome Back</h1>
+        <h1 className='text-xl font-bold text-emerald-200 mt-2'>Welcome To ALG</h1>
         <input
           required
           type='email'
