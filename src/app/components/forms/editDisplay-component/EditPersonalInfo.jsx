@@ -1,58 +1,88 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image";
-import Logo from "public/eagle-logo.webp";
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { InputMask } from 'primereact/inputmask'
 import { XSquare } from '@phosphor-icons/react'
 import UsStatesDropdown from "../../ui/UsStatesDropdown"
+import { useFormData } from "../../../../../FormDataContext";
 
-const EditPersonalInfo = ({ onEdit, formData, onSave }) => {  
-  const [fullLegalName, setFullLegalName] = useState('')
-  const [addressOne, setAddressOne] = useState('')
-  const [addressTwo, setAddressTwo] = useState(null)
-  const [city, setCity] = useState('')
-  const [zipcode, setZipcode] = useState('')
-  const [startDate, setStartDate] = useState(new Date())
-  const [maritalSelected, setMaritalSelected] = useState('')
-  const [selectedState, setSelectedState] = useState('')
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
-  const [isOpen, setIsOpen] = useState(false);
+const EditPersonalInfo = ({ onEdit, formData, onSave }) => {
+  const [personalData, setPersonalData] = useState({
+    fullLegalName: formData?.personalInfo?.fullLegalName || '',
+    addressOne: formData?.personalInfo?.addressOne || '',
+    addressTwo: formData?.personalInfo?.addressTwo || '',
+    city: formData?.personalInfo?.city || '',
+    zipcode: formData?.personalInfo?.zipcode || '',
+    dateOfBirth: new Date(formData?.personalInfo?.dateOfBirth) || new Date(),
+    maritalSelected: formData?.personalInfo?.maritalStatus || '',
+    selectedState: formData?.personalInfo?.selectedState || '',
+    phone: formData?.personalInfo?.phone || '',
+    email: formData?.personalInfo?.email || '',
+  });
+  // const { formData, updateFormData } = useFormData();
 
-  const [personalData, setPersonalData] = useState({formData});
-  const dateOfBirth = startDate
-  const maritalStatus = maritalSelected
-  
+  const {
+    fullLegalName,
+    addressOne,
+    addressTwo,
+    city,
+    zipcode,
+    startDate,
+    maritalSelected,
+    selectedState,
+    phone,
+    email,
+  } = personalData;
+
+  const handleOnStateSelect = (selectedState) => {
+    setPersonalData((prevData) => ({ ...prevData, selectedState }));
+  };
+
+  const handleOnMaritalSelect = (value) => {
+    setPersonalData((prevData) => ({ ...prevData, maritalSelected: value }));
+  };
+
   const handlePersonalInfoSave = (e) => {
     e.preventDefault()
+
     const editedPersonalFormData = {
       fullLegalName,
       addressOne,
       addressTwo,
       city,
       zipcode,
-      dateOfBirth,
-      maritalStatus,
+      dateOfBirth: startDate,
+      maritalStatus: maritalSelected,
       selectedState,
       phone,
       email,
-    }
-    console.log("Edited Data:", editedPersonalFormData)
+    };
     onSave(editedPersonalFormData)
     onEdit();
+
+    console.log("editedPersonalFormData IN EDIT PERSONAAL INFO:", editedPersonalFormData)
   }
 
-  const handleOnStateSelect = (selectedState) => {
-    setSelectedState(selectedState)
-    console.log('The state you selected is:', selectedState)
-  }
 
-  const handleOnMaritalSelect = (value) => {
-    setMaritalSelected(value)
-  }
+  useEffect(() => {
+    const dateOfBirthString = formData?.personalInfo?.dateOfBirth;
+    console.log('dateOfBirthString:', dateOfBirthString);
+
+    // Set a default date if dateOfBirthString is undefined
+    const defaultDate = new Date(); // You can adjust this default date as needed
+
+    setPersonalData((prevData) => ({
+      ...prevData,
+      ...formData?.personalInfo,
+      startDate: dateOfBirthString ? new Date(dateOfBirthString) : defaultDate,
+    }));
+
+    const dateOfBirth = dateOfBirthString ? new Date(dateOfBirthString) : defaultDate;
+    console.log('Parsed dateOfBirth:', dateOfBirth);
+  }, [formData]);
 
   return (
     <div className="flex flex-wrap gap-6 w-full">
@@ -70,8 +100,8 @@ const EditPersonalInfo = ({ onEdit, formData, onSave }) => {
               required
               id='full-legal-name'
               type='text'
-              value={fullLegalName}
-              onChange={(e) => setFullLegalName(e.target.value)}
+              value={personalData.fullLegalName}
+              onChange={(e) => setPersonalData((prevData) => ({ ...prevData, fullLegalName: e.target.value }))}
               className='px-2 outline-none'
             />
           </div>
@@ -80,8 +110,8 @@ const EditPersonalInfo = ({ onEdit, formData, onSave }) => {
             <DatePicker
               required
               selected={startDate}
-              value={startDate}
-              onChange={(date) => setStartDate(date)}
+              value={personalData.startDate}
+              onChange={(e) => setPersonalData((prevData) => ({ ...prevData, dateOfBirth: personalData.startDate }))}
               peekNextMonth
               showMonthDropdown
               showYearDropdown
@@ -112,7 +142,7 @@ const EditPersonalInfo = ({ onEdit, formData, onSave }) => {
               id='address-one'
               type='text'
               value={addressOne}
-              onChange={(e) => setAddressOne(e.target.value)}
+              onChange={(e) => setPersonalData((prevData) => ({ ...prevData, addressOne: e.target.value }))}
               className='px-2 outline-none'
             />
           </div>
@@ -122,7 +152,7 @@ const EditPersonalInfo = ({ onEdit, formData, onSave }) => {
               id='address-two'
               type='text'
               value={addressTwo}
-              onChange={(e) => setAddressTwo(e.target.value)}
+              onChange={(e) => setPersonalData((prevData) => ({ ...prevData, addressTwo: e.target.value }))}
               className='px-2 outline-none'
             />
           </div>
@@ -133,7 +163,7 @@ const EditPersonalInfo = ({ onEdit, formData, onSave }) => {
               id='city'
               type='text'
               value={city}
-              onChange={(e) => setCity(e.target.value)}
+              onChange={(e) => setPersonalData((prevData) => ({ ...prevData, city: e.target.value }))}
               className='px-2 outline-none'
             />
           </div>
@@ -148,7 +178,7 @@ const EditPersonalInfo = ({ onEdit, formData, onSave }) => {
               id='zipcode'
               type='number'
               value={zipcode}
-              onChange={(e) => setZipcode(e.target.value)}
+              onChange={(e) => setPersonalData((prevData) => ({ ...prevData, zipcode: e.target.value }))}
               className='pfullLegalNamex-2 outline-none'
             />
           </div>
@@ -161,7 +191,7 @@ const EditPersonalInfo = ({ onEdit, formData, onSave }) => {
               placeholder='(123) 456-7890'
               type='tel'
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => setPersonalData((prevData) => ({ ...prevData, phone: e.target.value }))}
               className='px-2 outline-none'
             />
           </div>
@@ -173,22 +203,13 @@ const EditPersonalInfo = ({ onEdit, formData, onSave }) => {
               type='email'
               value={email}
               placeholder='hello@email.com'
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setPersonalData((prevData) => ({ ...prevData, email: e.target.value }))}
               className='px-2 outline-none'
             />
           </div>
-          {/* <div className="absolute bottom-14 -left-8 -z-3 w-[17.8rem]">
-            <Image
-              src={Logo}
-              alt="eagle-silhouette"
-              width={300}
-              height={300}
-              className="flex p-2 items-center justify-center opacity-10"
-            />
-          </div> */}
-          <button 
-            type='button' 
-            onClick={handlePersonalInfoSave} 
+          <button
+            type='button'
+            onClick={handlePersonalInfoSave}
             className='w-full py-1 px-2 bg-slate-700/70 text-white rounded font-semibold'>Update Personal Information</button>
         </div>
       </div>

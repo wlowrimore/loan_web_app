@@ -87,14 +87,14 @@ const LoanDetailsForm = ({ onSave }) => {
             name="loan-purpose"
             className="w-fit px-1 border border-emerald-800 rounded outline-none bg-white"
           >
-            <option value="reason">----</option>
-            <option value="home improvements">Home Improvements</option>
-            <option value="debt consolidation">Debt Consolidation</option>
-            <option value="automotive repairs">Automotive Repairs</option>
-            <option value="medical expenses">Medical Expenses</option>
-            <option value="back taxes">Back Taxes</option>
-            <option value="tuition">Tuition</option>
-            <option value="other">Other</option>
+            <option value="Reason">----</option>
+            <option value="Home Improvements">Home Improvements</option>
+            <option value="Debt Consolidation">Debt Consolidation</option>
+            <option value="Automotive Repairs">Automotive Repairs</option>
+            <option value="Medical Expenses">Medical Expenses</option>
+            <option value="Back Taxes">Back Taxes</option>
+            <option value="Tuition">Tuition</option>
+            <option value="Other">Other</option>
           </select>
         </div>
         {isOtherSelected === true ? (
@@ -124,9 +124,9 @@ const LoanDetailsForm = ({ onSave }) => {
           >
             <option value="status">----</option>
             <option value="12-months">12 Months</option>
-            <option value="ten-years">10 Years</option>
-            <option value="seven-years">7 Years</option>
-            <option value="five-years">5 Years</option>
+            <option value="10-years">10 Years</option>
+            <option value="7-years">7 Years</option>
+            <option value="5-years">5 Years</option>
             <option value="3-years">3 Years</option>
           </select>
         </div>

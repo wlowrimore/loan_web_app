@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Logo from "public/eagle-logo.webp";
+import Logo from "/public/eagle-logo.webp";
 import { Pencil } from '@phosphor-icons/react'
 import TodaysDate from "../../ui/TodaysDate";
 

@@ -3,51 +3,42 @@
 import { useState } from "react";
 
 import DisplayPersonalInfo from "../forms/editDisplay-component/DisplayPersonalInfo";
-import DisplayEmploymentInfo from "../forms/editDisplay-component/DisplayEmploymentInfo";
-import DisplayFinancialInfo from "../forms/editDisplay-component/DisplayFinancialInfo";
-import DisplayLoanDetailsInfo from "../forms/editDisplay-component/DisplayLoanDetailsInfo";
-
 import EditPersonalInfo from "../forms/editDisplay-component/EditPersonalInfo";
-import EditEmploymentInfo from "../forms/editDisplay-component/EditEmploymentInfo";
-import EditFinancialInfo from "../forms/editDisplay-component/EditFinancialInfo";
-import EditLoanDetailsInfo from "../forms/editDisplay-component/EditLoanDetailsInfo";
+import { useFormData } from "../../../../FormDataContext";
 
-const ConfirmAndSubmit = ({ formData, onSave }) => {
+const ConfirmAndSubmit = ({ onSave }) => {
+  const { formData, updateFormData } = useFormData();
+  const [editedPersonalData, setEditedPersonalData] = useState(formData.personalInfo)
+
+  console.log("formData form ConfirmAndSubmit.jsx:", formData)
+
   const [isPersonalInfoEditable, setIsPersonalInfoEditable] = useState(false)
-  const [isEmploymentInfoEditable, setIsEmploymentInfoEditable] = useState(false)
-  const [isFinancialInfoEditable, setIsFinancialInfoEditable] = useState(false)
-  const [isLoanDetailsInfoEditable, setIsLoanDetailsInfoEditable] = useState(false)
+  const [personalData, setPersonalData] = useState(formData.personalInfo)
 
   const handleEditPersonalInfo = () => {
     setIsPersonalInfoEditable(!isPersonalInfoEditable)
   }
 
-  const handleSavePersonalInfo = (editedData) => {
-    onSave({
-      ...formData,
+  const handlePersonalInfoUpdate = (editedData) => {
+    setEditedPersonalData(editedData)
+    console.log("EDITED DATA FROM CONFIRM AND SUBMIT:", editedData)
+  }
+
+  const handleSave = () => {
+    // Validate and convert dateOfBirth to a valid Date object
+    const dateOfBirth = parseDate(personalData.dateOfBirth);
+
+    const editedData = {
       personalInfo: {
-        ...formData.personalInfo,
-        ...editedData,
-      }
-    });
-    handleEditPersonalInfo();
-  }
+        ...personalData,
+        dateOfBirth,
+      },
+    };
 
-  const handleEditEmploymentInfo = () => {
-    setIsEmploymentInfoEditable(!isEmploymentInfoEditable)
-  }
+    updateFormData(editedData);
 
-  const handleEditFinancialInfo = () => {
-    setIsFinancialInfoEditable(!isFinancialInfoEditable)
+    onSave(editedData);
   }
-
-  const handleLoanDetailsInfo = () => {
-    setIsLoanDetailsInfoEditable(!isLoanDetailsInfoEditable)
-  }
-
-  // console.log("FORM DATA FROM LOAN REQUEST FORM:", formData);
-  // const { personalInfo, employmentInfo, financialInfo, loanDetailsInfo } =
-  //   formData;
 
   return (
     <>
@@ -65,36 +56,42 @@ const ConfirmAndSubmit = ({ formData, onSave }) => {
 
         {/* PERSONAL INFO */}
         {isPersonalInfoEditable ? (
-          <EditPersonalInfo formData={formData} onSave={onSave} onEdit={handleEditPersonalInfo} />
+          <EditPersonalInfo
+            formData={formData}
+            onSave={handlePersonalInfoUpdate}
+            onEdit={handleEditPersonalInfo} />
         ) : (
-          <DisplayPersonalInfo formData={formData} onEdit={handleEditPersonalInfo} />
+          <DisplayPersonalInfo updateFormData={editedPersonalData} onEdit={handleEditPersonalInfo} />
         )}
 
         {/* EMPLOYMENT INFO */}
-        {isEmploymentInfoEditable ? (
-          <EditEmploymentInfo />
+        {/* {isEmploymentInfoEditable ? (
+          <EditEmploymentInfo
+            formData={formData.employmentInfo}
+            onSave={handleSaveEmploymentInfo}
+            onEdit={handleEditEmploymentInfo} />
         ) : (
-          <DisplayEmploymentInfo formData={formData} />
-        )}
+          <DisplayEmploymentInfo formData={formData.employmentInfo} onEdit={handleEditEmploymentInfo} />
+        )} */}
 
         {/* FINANCIAL INFO */}
-        {isFinancialInfoEditable ? (
+        {/* {isFinancialInfoEditable ? (
           <EditFinancialInfo />
         ) : (
           <DisplayFinancialInfo formData={formData} />
-        )}
+        )} */}
 
         {/* LOAN DETAILS INFO */}
-        {isLoanDetailsInfoEditable ? (
+        {/* {isLoanDetailsInfoEditable ? (
           <EditLoanDetailsInfo />
         ) : (
           <DisplayLoanDetailsInfo formData={formData} />
-        )}
+        )} */}
 
         <div className="mb-4">
           <button
             type="button"
-            onClick={() => onSave()}
+            onClick={handleSave}
             className="w-full py-2 px-2 text-[1rem] text-emerald-50 bg-emerald-700/70 rounded font-semibold"
           >
             Submit Loan Application

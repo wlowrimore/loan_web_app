@@ -95,9 +95,9 @@ const FinancialInfoForm = ({ onSave }) => {
             onChange={(e) => handleOnHousingTypeSelect(e.target.value)}
             name='housing-type'
             className='w-fit px-2 border border-emerald-800 rounded outline-none bg-white'>
-            <option value='status'>Options</option>
-            <option value='rent'>Rent</option>
-            <option value='mortgage'>Mortgage</option>
+            <option value='Status'>Options</option>
+            <option value='Rental'>Rent</option>
+            <option value='Mortgage'>Mortgage</option>
           </select>
         </div>
         <div className='flex flex-col'>
@@ -204,9 +204,9 @@ const FinancialInfoForm = ({ onSave }) => {
             onChange={(e) => handleOnBankAccountTypeSelect(e.target.value)}
             name='bank-account-type'
             className='w-fit px-2 border border-emerald-800 rounded outline-none bg-white'>
-            <option value='options'>Options</option>
-            <option value='personal'>Personal</option>
-            <option value='business'>Business</option>
+            <option value='Options'>Options</option>
+            <option value='Personal'>Personal</option>
+            <option value='Business'>Business</option>
           </select>
         </div>
         <div className='flex flex-col'>

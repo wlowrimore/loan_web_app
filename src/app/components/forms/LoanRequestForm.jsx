@@ -9,17 +9,16 @@ import LoanDetailsInfoForm from "./loan-form-components/LoanDetailsForm";
 import Submitted from "../Submitted";
 import TimelineComponent from "../ui/TimelineComponent";
 import ConfirmAndSubmit from "../confirm-submit/ConfirmAndSubmit";
+import { useFormData } from "../../../../FormDataContext";
 
 const LoanRequestForm = () => {
-  const [personalInfo, setPersonalInfo] = useState({});
-  const [employmentInfo, setEmploymentInfo] = useState({});
-  const [financialInfo, setFinancialsInfo] = useState({});
-  const [loanDetailsInfo, setLoanDetailsInfo] = useState({});
+  const { formData, updateFormData } = useFormData();
+  const { personalInfo, employmentInfo, financialInfo, loanDetailsInfo } = formData
 
   const [isPersonalInfoCompleted, setIsPersonalInfoCompleted] = useState(false);
   const [isEmploymentInfoCompleted, setIsEmploymentInfoCompleted] =
     useState(false);
-  const [isFinancialInfoCompleted, setIsFinancialsInfoCompleted] =
+  const [isFinancialInfoCompleted, setIsFinancialInfoCompleted] =
     useState(false);
   const [isLoanDetailsInfoCompleted, setIsLoanDetailsInfoCompleted] =
     useState(false);
@@ -29,7 +28,7 @@ const LoanRequestForm = () => {
 
   const handlePersonalInfoSubmit = (data) => {
     setIsPersonalInfoCompleted(true);
-    setPersonalInfo(data)
+    updateFormData({ personalInfo: data })
 
     if (currentComponentIndex < 3) {
       setCurrentComponentIndex(currentComponentIndex + 1)
@@ -37,29 +36,73 @@ const LoanRequestForm = () => {
       setCurrentComponentIndex(4);
     }
   };
+  useEffect(() => {
+    console.log("UPDATED PERSONAL INFO FROM LOAN RQST FORM:", personalInfo)
+  }, [personalInfo])
+
   const handleEmploymentInfoSubmit = (data) => {
     setIsEmploymentInfoCompleted(true);
-    setEmploymentInfo(data);
-    setCurrentComponentIndex(2);
+    updateFormData({ employmentInfo: data })
+
+    if (currentComponentIndex < 3) {
+      setCurrentComponentIndex(currentComponentIndex + 1)
+    } else {
+      setCurrentComponentIndex(4);
+    }
   };
+  useEffect(() => {
+    console.log("UPDATED EMPLOYMENT INFO FROM LOAN RQST FORM:", employmentInfo)
+  }, [employmentInfo])
+
   const handleFinancialInfoSubmit = (data) => {
-    setIsFinancialsInfoCompleted(true);
-    setFinancialsInfo(data);
-    setCurrentComponentIndex(3);
+    setIsFinancialInfoCompleted(true);
+    updateFormData({ financialInfo: data })
+
+    if (currentComponentIndex < 3) {
+      setCurrentComponentIndex(currentComponentIndex + 1)
+    } else {
+      setCurrentComponentIndex(4);
+    }
   };
+  useEffect(() => {
+    console.log("UPDATED FINANCIALl INFO FROM LOAN RQST FORM:", financialInfo)
+  }, [financialInfo])
 
   const handleLoanDetailsInfoSubmit = (data) => {
     setIsLoanDetailsInfoCompleted(true);
-    // setIsRequestSubmitted(true);
-    setLoanDetailsInfo(data);
-    setCurrentComponentIndex(4);
-  };
+    updateFormData({ loanDetailsInfo: data })
 
-  const handleConfirmAndSubmit = () => {
-    setIsRequestSubmitted(true);
-    handleSaveToDatabase()
-    setCurrentComponentIndex(5);
+    if (currentComponentIndex < 3) {
+      setCurrentComponentIndex(currentComponentIndex + 1)
+    } else {
+      setCurrentComponentIndex(4);
+    }
   };
+  useEffect(() => {
+    console.log("UPDATED LOAN DETAILS INFO FROM LOAN RQST FORM:", loanDetailsInfo)
+  }, [loanDetailsInfo])
+
+  // const handleConfirmAndSubmit = () => {
+  //   setIsRequestSubmitted(true);
+  //   handleSaveToDatabase()
+  //   setCurrentComponentIndex(5);
+  // };
+
+  const handleEditPersonalInfoSave = (editedData) => {
+    updateFormData({ personalInfo: editedData })
+  }
+
+  // const handleEditEmploymentInfoSave = (editedData) => {
+  //   updateFormData({ employmentInfo: editedData })
+  // }
+
+  // const handleEditFinancialInfoSave = (editedData) => {
+  //   updateFormData({ financialInfo: editedData })
+  // }
+
+  // const handleEditLoanDetailsInfoSave = (editedData) => {
+  //   updateFormData({ employmentInfo: editedData })
+  // }
 
   const handleSaveToDatabase = async () => {
     const formData = {
@@ -97,16 +140,17 @@ const LoanRequestForm = () => {
     }
   }, [currentComponentIndex]);
 
+
   const renderCurrentForm = () => {
     switch (currentComponentIndex) {
       case 0:
         return <PersonalInfoForm onSave={handlePersonalInfoSubmit} />;
       case 1:
-        return <EmploymentInfoForm onSave={handleEmploymentInfoSubmit} />;
+        return <EmploymentInfoForm onSave={handleEmploymentInfoSubmit} />
       case 2:
-        return <FinancialInfoForm onSave={handleFinancialInfoSubmit} />;
+        return <FinancialInfoForm onSave={handleFinancialInfoSubmit} />
       case 3:
-        return <LoanDetailsInfoForm onSave={handleLoanDetailsInfoSubmit} />;
+        return <LoanDetailsInfoForm onSave={handleLoanDetailsInfoSubmit} />
       case 4:
         return (
           <ConfirmAndSubmit
@@ -116,7 +160,9 @@ const LoanRequestForm = () => {
               financialInfo,
               loanDetailsInfo,
             }}
-            onSave={handlePersonalInfoSubmit}
+            onSave={(editedData) =>
+              handleEditPersonalInfoSave(editedData)
+            }
           />
         );
       case 5:
@@ -138,10 +184,6 @@ const LoanRequestForm = () => {
       <div className="w-full border border-emerald-800 rounded-tl rounded-tr bg-green-800/60 pt-2 pb-4 px-4 mt-8">
         {renderCurrentForm()}
       </div>
-      {/* <div>
-        <button onClick={handleSaveToDatabase}>Submit Loan Application</button>
-      </div> */}
-
       <div className="w-full flex border border-emerald-800 rounded-bl rounded-br bg-green-100/40 p-4 mt-2">
         <div className="w-full flex justify-between text-sm text-neutral-800">
           <ul className="flex flex-col space-y-2">

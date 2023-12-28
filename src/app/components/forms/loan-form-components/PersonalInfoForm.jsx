@@ -55,7 +55,7 @@ const PersonalInfoForm = ({ onSave }) => {
 
   const handleOnStateSelect = (selectedState) => {
     setSelectedState(selectedState)
-    console.log('The state you selected is:', selectedState)
+    // console.log('The state you selected is:', selectedState)
   }
 
   const handleOnMaritalSelect = (value) => {
@@ -77,11 +77,6 @@ const PersonalInfoForm = ({ onSave }) => {
       setIsCitizen(null)
     }
   }
-  // const handlePersonalInfoSaveAndSwitch = (data) => {
-  //   setIsPersonalInfoCompleted(true)
-  //   setPersonalInfo(data)
-  //   setCurrentComponentIndex()
-  // }
 
   return (
     <form>
@@ -177,12 +172,12 @@ const PersonalInfoForm = ({ onSave }) => {
               onChange={(e) => handleOnMaritalSelect(e.target.value)}
               name='marital-status'
               className='w-fit px-2 border border-emerald-800 rounded outline-none bg-white'>
-              <option value='status'>----</option>
-              <option value='single'>Single</option>
-              <option value='married'>Married</option>
-              <option value='other'>Common Law</option>
-              <option value='separated'>Separated</option>
-              <option value='widowed'>Widowed</option>
+              <option value='Status'>----</option>
+              <option value='Single'>Single</option>
+              <option value='Married'>Married</option>
+              <option value='Other'>Common Law</option>
+              <option value='Separated'>Separated</option>
+              <option value='Widowed'>Widowed</option>
             </select>
           </div>
 

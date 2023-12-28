@@ -1,8 +1,12 @@
-import Image from "next/image";
-import Logo from "public/eagle-logo.webp";
-import { Pencil } from '@phosphor-icons/react'
+'use client'
 
-const DisplayEmploymentInfo = ({ formData }) => {
+import { useState } from "react";
+import Image from "next/image";
+import Logo from '/public/eagle-logo.webp'
+import { Pencil } from '@phosphor-icons/react'
+// import { useState } from "react";
+
+const DisplayEmploymentInfo = ({ formData, onEdit }) => {
   const { employmentInfo } =
     formData;
   return (
@@ -14,7 +18,7 @@ const DisplayEmploymentInfo = ({ formData }) => {
           </h1>
         </header>
         <div className="relative space-y-2 py-4 px-2">
-          <div className='absolute z-10 top-2 right-2'><Pencil size={16} color="#3c675c" weight="light" /></div>
+          <div onClick={onEdit} className='absolute z-10 top-2 right-2'><Pencil size={16} color="#3c675c" weight="light" /></div>
           <div className="flex flex-col">
             <h3 className="font-semibold">Employment Status:</h3>
             <p className="text-[1rem] font-normal">

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Logo from 'public/eagle-logo.webp'
+import Logo from '/public/eagle-logo.webp'
 import { LoginButton, LogoutButton, SignUpButton } from './Auth'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../api/auth/[...nextauth]/route'

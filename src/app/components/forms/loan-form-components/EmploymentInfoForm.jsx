@@ -48,7 +48,7 @@ const EmploymentInfoForm = ({ onSave }) => {
 
   const handleOnStateSelect = (selectedState) => {
     setSelectedState(selectedState)
-    console.log('The state you selected is:', selectedState)
+    // console.log('The state you selected is:', selectedState)
   }
 
   return (
@@ -63,11 +63,11 @@ const EmploymentInfoForm = ({ onSave }) => {
             onChange={(e) => handleOnEmploymentSelect(e.target.value)}
             name='employment-status'
             className='w-fit px-2 border border-emerald-800 rounded outline-none bg-white'>
-            <option value='status'>----</option>
-            <option value='full-time-employed'>Employed &#40;Full-Time&#41;</option>
-            <option value='part-time-employed'>Employed &#40;Part-Time&#41;</option>
-            <option value='self-employed'>Self-Employed</option>
-            <option value='unemployed'>Unemployed</option>
+            <option value='Status'>----</option>
+            <option value='Full-Time-Employed'>Employed &#40;Full-Time&#41;</option>
+            <option value='Part-Time-Employed'>Employed &#40;Part-Time&#41;</option>
+            <option value='Self-Employed'>Self-Employed</option>
+            <option value='Unemployed'>Unemployed</option>
           </select>
         </div>
         <div className='flex flex-col'>

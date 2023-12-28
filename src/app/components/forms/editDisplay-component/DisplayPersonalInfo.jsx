@@ -1,11 +1,21 @@
-import Image from "next/image";
-import Logo from "public/eagle-logo.webp";
-import { Pencil } from '@phosphor-icons/react'
+'use client'
 
-const displayPersonalInfo = ({ formData, onEdit }) => {
-  const { personalInfo } =
-    formData;
-  console.log("ORIGINAL DATA:", formData)
+import { useState, useEffect } from 'react';
+import Image from "next/image";
+import Logo from "/public/eagle-logo.webp";
+import { Pencil } from '@phosphor-icons/react'
+import { useFormData } from '../../../../../FormDataContext';
+
+const DisplayPersonalInfo = ({ onEdit, updateFormData }) => {
+  const { formData } = useFormData()
+  const [personalInfo, setPersonalInfo] = useState(formData?.personalInfo)
+  // const personalInfo = formData?.personalInfo
+
+  useEffect(() => {
+    setPersonalInfo(updateFormData)
+    console.log("New FormData:", updateFormData)
+  }, [formData?.personalInfo])
+
   return (
     <div className="flex flex-wrap gap-6 w-full">
       <div className="flex flex-col border-8 my-4 border-emerald-700/70 rounded w-full">
@@ -30,7 +40,7 @@ const displayPersonalInfo = ({ formData, onEdit }) => {
           </div>
           <div className="flex flex-col">
             <h3 className="font-semibold">Marital Status:</h3>
-            <p className="text-[1rem] font-normal">
+            <p className="text-[1rem] font-normal capitalize">
               {personalInfo?.maritalStatus}
             </p>
           </div>
@@ -85,4 +95,4 @@ const displayPersonalInfo = ({ formData, onEdit }) => {
   )
 }
 
-export default displayPersonalInfo
+export default DisplayPersonalInfo
