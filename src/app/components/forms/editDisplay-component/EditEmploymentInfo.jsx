@@ -1,29 +1,71 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { InputMask } from 'primereact/inputmask'
 import { XSquare } from '@phosphor-icons/react'
 import DatePicker from 'react-datepicker'
 import UsStatesDropdown from '../../ui/UsStatesDropdown'
 
-const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) => {
-  const [employmentSelected, setEmploymentSelected] = useState('')
-  const [employersName, setEmployersName] = useState('')
-  const [employersPhone, setEmployersPhone] = useState('')
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
-  const [isCurrentPosition, setIsCurrentPosition] = useState(false)
-  const [jobTitle, setJobTitle] = useState('')
-  const [jobResponsibilites, setJobResponsibilities] = useState('')
-  const [grossMonthlyIncome, setGrossMonthlyIncome] = useState('')
-  const [employersAddressOne, setEmployersAddressOne] = useState('')
-  const [employersAddressTwo, setEmployersAddressTwo] = useState('')
-  const [employersCity, setEmployersCity] = useState('')
-  const [selectedState, setSelectedState] = useState('')
-  const [employersZipcode, setEmployersZipcode] = useState('')
+const EditEmploymentInfo = ({ onEdit, formData, onSave }) => {
+  const [employmentData, setEmploymentData] = useState({
+    employmentSelected: formData?.employmentInfo?.employmentSelected || '',
+    employersName: formData?.employmentInfo?.employersName || '',
+    employersPhone: formData?.employmentInfo?.employersPhone || '',
+    startDate: formData?.employmentInfo?.startDate || '',
+    endDate: formData?.employmentInfo?.endDate || '',
+    isCurrentPosition: formData?.employmentInfo?.isCurrentPosition || null,
+    jobTitle: formData?.employmentInfo?.jobTitle || '',
+    jobResponsibilities: formData?.employmentInfo?.jobResponsibilities || '',
+    grossMonthlyIncome: formData?.employmentInfo?.grossMonthlyIncome || '',
+    employersAddressOne: formData?.employmentInfo?.employersAddressOne || '',
+    employersAddressTwo: formData?.employmentInfo?.employersAddressTwo || 'Not Applicable',
+    employersCity: formData?.employmentInfo?.employersCity || '',
+    selectedState: formData?.employmentInfo?.selectedState || '',
+    employersZipcode: formData?.employmentInfo?.employersZipcode || '',
+  })
+  // const [employmentSelected, setEmploymentSelected] = useState('')
+  // const [employersName, setEmployersName] = useState('')
+  // const [employersPhone, setEmployersPhone] = useState('')
+  // const [startDate, setStartDate] = useState('')
+  // const [endDate, setEndDate] = useState('')
+  // const [isCurrentPosition, setIsCurrentPosition] = useState(false)
+  // const [jobTitle, setJobTitle] = useState('')
+  // const [jobResponsibilites, setJobResponsibilities] = useState('')
+  // const [grossMonthlyIncome, setGrossMonthlyIncome] = useState('')
+  // const [employersAddressOne, setEmployersAddressOne] = useState('')
+  // const [employersAddressTwo, setEmployersAddressTwo] = useState('')
+  // const [employersCity, setEmployersCity] = useState('')
+  // const [selectedState, setSelectedState] = useState('')
+  // const [employersZipcode, setEmployersZipcode] = useState('')
+
+  const {
+    employmentSelected,
+    employersName,
+    employersPhone,
+    startDate,
+    endDate,
+    isCurrentPosition,
+    jobTitle,
+    jobResponsibilites,
+    grossMonthlyIncome,
+    employersAddressOne,
+    employersAddressTwo,
+    employersCity,
+    selectedState,
+    employersZipcode
+  } = employmentData
+
+  const handleOnEmploymentSelect = (employmentSelected) => {
+    setEmploymentData((prevData) => ({ ...prevData, employmentSelected }))
+  }
+
+  const handleOnStateSelect = (selectedState) => {
+    setEmploymentData((prevData) => ({ ...prevData, selectedState }))
+  }
 
   const handleEmploymentInfoSave = (e) => {
     e.preventDefault()
+
     const editedEmploymentFormData = {
       employmentSelected,
       employersName,
@@ -40,27 +82,26 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) 
       selectedState,
       employersZipcode
     }
-    console.log("LATEST UPDATED DATA:", editedEmploymentFormData)
     onSave(editedEmploymentFormData)
-    // updateEmploymentInfo(editedEmploymentFormData)
     onEdit()
+
+    console.log("editedEmploymentFormData IN EDIT EMPLOYMENT INFO:", editedEmploymentFormData)
   }
 
-  const handleOnEmploymentSelect = (value) => {
-    setEmploymentSelected(value)
-  }
+  useEffect(() => {
+    setEmploymentData((prevData) => ({
+      ...prevData,
+      ...formData?.employmentInfo
+    }))
+  }, [formData])
 
-  const handleOnStateSelect = (selectedState) => {
-    setSelectedState(selectedState)
-    console.log('The state you selected is:', selectedState)
-  }
 
   return (
     <div className="flex flex-wrap gap-6 w-full">
       <div className="flex flex-col border-8 my-4 border-blue-700/50 rounded w-full">
         <header>
           <h1 className="text-center text-[1rem] font-bold tracking-wider bg-blue-700/50 text-emerald-50 px-2 pb-2 border-b border-blue-800">
-            Employment Information
+            &#40;Edit&#41;&nbsp;Employment Information
           </h1>
         </header>
         <div className="relative space-y-2 py-4 px-2 bg-blue-500/20">
@@ -69,8 +110,8 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) 
             <h3 className="font-semibold">Employment Status:</h3>
             <select
               required
-              value={employmentSelected}
-              onChange={(e) => handleOnEmploymentSelect(e.target.value)}
+              value={employmentData.employmentSelected}
+              onChange={(e) => setEmploymentData((prevData) => ({ ...prevData, employmentSelected: e.target.value }))}
               name='employment-status'
               className='w-fit px-2 border border-emerald-800 rounded outline-none bg-white'>
               <option value='status'>----</option>
@@ -86,8 +127,8 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) 
               required
               id='employers-name'
               type='text'
-              value={employersName}
-              onChange={(e) => setEmployersName(e.target.value)}
+              value={employmentData.employersName}
+              onChange={(e) => setEmploymentData((prevData) => ({ ...prevData, employersName: e.target.value }))}
               className='px-1 outline-none'
             />
           </div>
@@ -98,8 +139,9 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) 
               id='employers-phone'
               mask='(999) 999-9999'
               type='tel'
-              value={employersPhone}
-              onChange={(e) => setEmployersPhone(e.target.value)}
+              value={employmentData.employersPhone}
+              onChange={(e) => setEmploymentData((prevData) => ({ ...prevData, employersPhone: e.target.value }))}
+
               className='px-1 outline-none'
             />
           </div>
@@ -109,8 +151,8 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) 
               <DatePicker
                 required
                 selected={startDate}
-                value={startDate}
-                onChange={(date) => setStartDate(date)}
+                value={employmentData.startDate}
+                onChange={(e) => setEmploymentData((prevData) => ({ ...prevData, startDate: e.target.value }))}
                 peekNextMonth
                 showMonthDropdown
                 showYearDropdown
@@ -125,8 +167,8 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) 
               <DatePicker
                 required
                 selected={endDate}
-                value={endDate}
-                onChange={(date) => setEndDate(date)}
+                value={employmentData.endDate}
+                onChange={(e) => setEmploymentData((prevData) => ({ ...prevData, endDate: e.target.value }))}
                 peekNextMonth
                 showMonthDropdown
                 showYearDropdown
@@ -140,8 +182,8 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) 
             <input
               type='checkbox'
               name='current-position'
-              value={isCurrentPosition}
-              onChange={(e) => setIsCurrentPosition(!isCurrentPosition)}
+              value={employmentData.isCurrentPosition}
+              onChange={(e) => setEmploymentData((prevData) => ({ ...prevData, isCurrentPosition: e.target.value }))}
               selected
             />
           </div>
@@ -150,8 +192,8 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) 
             <input
               id='job-title'
               type='text'
-              value={jobTitle}
-              onChange={(e) => setJobTitle(e.target.value)}
+              value={employmentData.jobTitle}
+              onChange={(e) => setEmploymentData((prevData) => ({ ...prevData, jobTitle: e.target.value }))}
               className='px-1 outline-none'
             />
           </div>
@@ -160,8 +202,8 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) 
             <textarea
               id='job-responsibilies'
               rows='5'
-              value={jobResponsibilites}
-              onChange={(e) => setJobResponsibilities(e.target.value)}
+              value={employmentData.jobResponsibilites}
+              onChange={(e) => setEmploymentData((prevData) => ({ ...prevData, jobResponsibilities: e.target.value }))}
               className='px-1 outline-none'
             >
             </textarea>
@@ -171,8 +213,8 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) 
             <input
               id='gross-monthly-income'
               type='number'
-              value={grossMonthlyIncome}
-              onChange={(e) => setGrossMonthlyIncome(e.target.value)}
+              value={employmentData.grossMonthlyIncome}
+              onChange={(e) => setEmploymentData((prevData) => ({ ...prevData, grossMonthlyIncome: e.target.value }))}
               className='px-1 outline-none'
             />          </div>
 
@@ -184,8 +226,8 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) 
               required
               id='employers-address-one'
               type='text'
-              value={employersAddressOne}
-              onChange={(e) => setEmployersAddressOne(e.target.value)}
+              value={employmentData.employersAddressOne}
+              onChange={(e) => setEmploymentData((prevData) => ({ ...prevData, employersAddressOne: e.target.value }))}
               className='px-1 outline-none'
             />          </div>
           <div className="flex flex-col space-y-1">
@@ -193,8 +235,8 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) 
             <input
               id='employers-address-two'
               type='text'
-              value={employersAddressTwo}
-              onChange={(e) => setEmployersAddressTwo(e.target.value)}
+              value={employmentData.employersAddressTwo}
+              onChange={(e) => setEmploymentData((prevData) => ({ ...prevData, employersAddressTwo: e.target.value }))}
               className='px-1 outline-none'
             />          </div>
           <div className="flex flex-col space-y-1">
@@ -203,8 +245,8 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) 
               required
               id='employers-city'
               type='text'
-              value={employersCity}
-              onChange={(e) => setEmployersCity(e.target.value)}
+              value={employmentData.employersCity}
+              onChange={(e) => setEmploymentData((prevData) => ({ ...prevData, employersCity: e.target.value }))}
               className='px-1 outline-none'
             />          </div>
           <div className="flex flex-col space-y-1">
@@ -217,8 +259,8 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave, updateEmploymentInfo }) 
               required
               id='employers-zipcode'
               type='number'
-              value={employersZipcode}
-              onChange={(e) => setEmployersZipcode(e.target.value)}
+              value={employmentData.employersZipcode}
+              onChange={(e) => setEmploymentData((prevData) => ({ ...prevData, employersZipcode: e.target.value }))}
               className='px-1 outline-none'
             />
           </div>

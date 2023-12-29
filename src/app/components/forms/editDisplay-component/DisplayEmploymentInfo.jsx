@@ -1,14 +1,21 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Logo from '/public/eagle-logo.webp'
 import { Pencil } from '@phosphor-icons/react'
+import { useFormData } from "../../../../../FormDataContext";
 // import { useState } from "react";
 
-const DisplayEmploymentInfo = ({ formData, onEdit }) => {
-  const { employmentInfo } =
-    formData;
+const DisplayEmploymentInfo = ({ updateFormData, onEdit }) => {
+  const { formData } = useFormData()
+  const [employmentInfo, setEmploymentInfo] = useState(formData?.employmentInfo)
+
+  useEffect(() => {
+    setEmploymentInfo(updateFormData)
+    console.log("New Employment Form Data:", updateFormData)
+  }, [formData?.employmentInfo])
+
   return (
     <div className="flex flex-wrap gap-6 w-full">
       <div className="flex flex-col border-8 my-4 border-emerald-700/70 rounded w-full">

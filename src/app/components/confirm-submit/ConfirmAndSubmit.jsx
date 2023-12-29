@@ -4,16 +4,24 @@ import { useState } from "react";
 
 import DisplayPersonalInfo from "../forms/editDisplay-component/DisplayPersonalInfo";
 import EditPersonalInfo from "../forms/editDisplay-component/EditPersonalInfo";
+
+import DisplayEmploymentInfo from "../forms/editDisplay-component/DisplayEmploymentInfo";
+import EditEmploymentInfo from "../forms/editDisplay-component/EditEmploymentInfo";
+
 import { useFormData } from "../../../../FormDataContext";
 
 const ConfirmAndSubmit = ({ onSave }) => {
   const { formData, updateFormData } = useFormData();
   const [editedPersonalData, setEditedPersonalData] = useState(formData.personalInfo)
+  const [editedEmploymentData, setEditedEmploymentData] = useState(formData.employmentInfo)
 
   console.log("formData form ConfirmAndSubmit.jsx:", formData)
 
   const [isPersonalInfoEditable, setIsPersonalInfoEditable] = useState(false)
   const [personalData, setPersonalData] = useState(formData.personalInfo)
+
+  const [isEmploymentInfoEditable, setIsEmploymentInfoEditable] = useState(false)
+  const [employmentData, setEmploymentData] = useState(formData.employmentInfo)
 
   const handleEditPersonalInfo = () => {
     setIsPersonalInfoEditable(!isPersonalInfoEditable)
@@ -22,6 +30,14 @@ const ConfirmAndSubmit = ({ onSave }) => {
   const handlePersonalInfoUpdate = (editedData) => {
     setEditedPersonalData(editedData)
     console.log("EDITED DATA FROM CONFIRM AND SUBMIT:", editedData)
+  }
+
+  const handleEditEmploymentInfo = () => {
+    setIsEmploymentInfoEditable(!isEmploymentInfoEditable)
+  }
+
+  const handleEmploymentInfoUpdate = (editedData) => {
+    setEditedEmploymentData(editedData)
   }
 
   const handleSave = () => {
@@ -33,6 +49,9 @@ const ConfirmAndSubmit = ({ onSave }) => {
         ...personalData,
         dateOfBirth,
       },
+      employmentInfo: {
+        ...employmentData,
+      }
     };
 
     updateFormData(editedData);
@@ -46,11 +65,11 @@ const ConfirmAndSubmit = ({ onSave }) => {
         <h1 className="text-2xl font-bold text-emerald-800 pt-4">
           Let&apos;s Review
         </h1>
-        <p className="flex flex-wrap text-[1rem] pb-4">
-          Take a moment to carefully review your data before submitting your
-          application. Make any edits you need on this page. The information you
+        <ul className="flex flex-wrap text-[1rem] pb-3">
+          Take a moment to carefully review your entered information before submitting your
+          application. Make any edits needed on this page. The information you
           submit is final.
-        </p>
+        </ul>
 
         <hr />
 
@@ -65,14 +84,14 @@ const ConfirmAndSubmit = ({ onSave }) => {
         )}
 
         {/* EMPLOYMENT INFO */}
-        {/* {isEmploymentInfoEditable ? (
+        {isEmploymentInfoEditable ? (
           <EditEmploymentInfo
-            formData={formData.employmentInfo}
-            onSave={handleSaveEmploymentInfo}
+            formData={formData}
+            onSave={handleEmploymentInfoUpdate}
             onEdit={handleEditEmploymentInfo} />
         ) : (
-          <DisplayEmploymentInfo formData={formData.employmentInfo} onEdit={handleEditEmploymentInfo} />
-        )} */}
+          <DisplayEmploymentInfo updateFormData={editedEmploymentData} onEdit={handleEditEmploymentInfo} />
+        )}
 
         {/* FINANCIAL INFO */}
         {/* {isFinancialInfoEditable ? (

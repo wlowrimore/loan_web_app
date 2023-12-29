@@ -89,7 +89,7 @@ const EditPersonalInfo = ({ onEdit, formData, onSave }) => {
       <div className="flex flex-col border-8 my-4 border-blue-700/50 rounded w-full">
         <header>
           <h1 className="text-center text-[1rem] font-bold tracking-wider bg-blue-700/50 text-emerald-50 px-2 pb-2 border-b border-blue-800">
-            Personal Information
+            &#40;Edit&#41;&nbsp;Personal Information
           </h1>
         </header>
         <div className="relative space-y-2 py-4 px-2 bg-blue-500/20">
