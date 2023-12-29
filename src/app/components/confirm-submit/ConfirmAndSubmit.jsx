@@ -11,6 +11,9 @@ import EditEmploymentInfo from "../forms/editDisplay-component/EditEmploymentInf
 import DisplayFinancialInfo from "../forms/editDisplay-component/DisplayFinancialInfo";
 import EditFinancialInfo from "../forms/editDisplay-component/EditFinancialInfo";
 
+import DisplayLoanDetailsInfo from "../forms/editDisplay-component/DisplayLoanDetailsInfo";
+import EditLoanDetailsInfo from "../forms/editDisplay-component/EditLoanDetailsInfo";
+
 import { useFormData } from "../../../../FormDataContext";
 
 const ConfirmAndSubmit = ({ onSave }) => {
@@ -18,6 +21,7 @@ const ConfirmAndSubmit = ({ onSave }) => {
   const [editedPersonalData, setEditedPersonalData] = useState(formData.personalInfo)
   const [editedEmploymentData, setEditedEmploymentData] = useState(formData.employmentInfo)
   const [editedFinancialData, setEditedFinancialData] = useState(formData.financialInfo)
+  const [editedLoanDetailsData, setEditedLoanDetailsData] = useState(formData.loanDetailsInfo)
 
   console.log("formData form ConfirmAndSubmit.jsx:", formData)
 
@@ -29,6 +33,9 @@ const ConfirmAndSubmit = ({ onSave }) => {
 
   const [isFinancialInfoEditable, setIsFinancialInfoEditable] = useState(false)
   const [financialData, setFinancialData] = useState(formData.financialInfo)
+
+  const [isLoanDetailsInfoEditable, setIsLoanDetailsInfoEditable] = useState(false)
+  const [loanDetailsData, setLoanDetailsData] = useState(formData.loanDetailsInfo)
 
   const handleEditPersonalInfo = () => {
     setIsPersonalInfoEditable(!isPersonalInfoEditable)
@@ -55,6 +62,14 @@ const ConfirmAndSubmit = ({ onSave }) => {
     setEditedFinancialData(editedData)
   }
 
+  const handleEditLoanDetailsInfo = () => {
+    setIsLoanDetailsInfoEditable(!isLoanDetailsInfoEditable)
+  }
+
+  const handleLoanDetailsInfoUpdate = (editedData) => {
+    setEditedLoanDetailsData(editedData)
+  }
+
   const handleSave = () => {
     // Validate and convert dateOfBirth to a valid Date object
     const dateOfBirth = parseDate(personalData.dateOfBirth);
@@ -69,6 +84,9 @@ const ConfirmAndSubmit = ({ onSave }) => {
       },
       financialInfo: {
         ...financialData,
+      },
+      loanDetailsInfo: {
+        ...loanDetailsData,
       },
     };
 
@@ -122,11 +140,14 @@ const ConfirmAndSubmit = ({ onSave }) => {
         )}
 
         {/* LOAN DETAILS INFO */}
-        {/* {isLoanDetailsInfoEditable ? (
-          <EditLoanDetailsInfo />
+        {isLoanDetailsInfoEditable ? (
+          <EditLoanDetailsInfo
+            formData={formData}
+            onSave={handleLoanDetailsInfoUpdate}
+            onEdit={handleEditLoanDetailsInfo} />
         ) : (
-          <DisplayLoanDetailsInfo formData={formData} />
-        )} */}
+          <DisplayLoanDetailsInfo updateFormData={editedLoanDetailsData} onEdit={handleEditLoanDetailsInfo} />
+        )}
 
         <div className="mb-4">
           <button

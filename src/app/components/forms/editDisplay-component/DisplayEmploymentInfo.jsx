@@ -68,7 +68,7 @@ const DisplayEmploymentInfo = ({ updateFormData, onEdit }) => {
           </div>
           <div className="flex flex-col">
             <h3 className="font-semibold">Job Responsibilities:</h3>
-            <p className="text-[1rem] font-normal">
+            <p className="text-[0.9rem] font-normal">
               {employmentInfo?.jobResponsibilities}
             </p>
           </div>

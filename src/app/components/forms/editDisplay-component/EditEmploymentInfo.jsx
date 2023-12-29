@@ -23,20 +23,6 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave }) => {
     selectedState: formData?.employmentInfo?.selectedState || '',
     employersZipcode: formData?.employmentInfo?.employersZipcode || '',
   })
-  // const [employmentSelected, setEmploymentSelected] = useState('')
-  // const [employersName, setEmployersName] = useState('')
-  // const [employersPhone, setEmployersPhone] = useState('')
-  // const [startDate, setStartDate] = useState('')
-  // const [endDate, setEndDate] = useState('')
-  // const [isCurrentPosition, setIsCurrentPosition] = useState(false)
-  // const [jobTitle, setJobTitle] = useState('')
-  // const [jobResponsibilites, setJobResponsibilities] = useState('')
-  // const [grossMonthlyIncome, setGrossMonthlyIncome] = useState('')
-  // const [employersAddressOne, setEmployersAddressOne] = useState('')
-  // const [employersAddressTwo, setEmployersAddressTwo] = useState('')
-  // const [employersCity, setEmployersCity] = useState('')
-  // const [selectedState, setSelectedState] = useState('')
-  // const [employersZipcode, setEmployersZipcode] = useState('')
 
   const {
     employmentSelected,
@@ -46,7 +32,7 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave }) => {
     endDate,
     isCurrentPosition,
     jobTitle,
-    jobResponsibilites,
+    jobResponsibilities,
     grossMonthlyIncome,
     employersAddressOne,
     employersAddressTwo,
@@ -74,7 +60,7 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave }) => {
       endDate,
       isCurrentPosition,
       jobTitle,
-      jobResponsibilites,
+      jobResponsibilities,
       grossMonthlyIncome,
       employersAddressOne,
       employersAddressTwo,
@@ -202,7 +188,7 @@ const EditEmploymentInfo = ({ onEdit, formData, onSave }) => {
             <textarea
               id='job-responsibilies'
               rows='5'
-              value={employmentData.jobResponsibilites}
+              value={employmentData.jobResponsibilities}
               onChange={(e) => setEmploymentData((prevData) => ({ ...prevData, jobResponsibilities: e.target.value }))}
               className='px-1 outline-none'
             >

@@ -1,10 +1,20 @@
+'use client'
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Logo from "/public/eagle-logo.webp";
 import { Pencil } from '@phosphor-icons/react'
 import TodaysDate from "../../ui/TodaysDate";
+import { useFormData } from "../../../../../FormDataContext";
 
-const DisplayLoanDetailsInfo = ({ formData }) => {
-  const { loanDetailsInfo } = formData;
+const DisplayLoanDetailsInfo = ({ onEdit, updateFormData }) => {
+  const { formData } = useFormData()
+  const [loanDetailsInfo, setLoanDetailsInfo] = useState(formData?.loanDetailsInfo)
+
+  useEffect(() => {
+    setLoanDetailsInfo(updateFormData)
+    console.log("New Loan Details Form Data:", updateFormData)
+  }, [formData?.loanDetailsInfo])
 
   return (
     <div className="flex flex-wrap gap-6 w-full">
@@ -15,7 +25,7 @@ const DisplayLoanDetailsInfo = ({ formData }) => {
           </h1>
         </header>
         <div className="relative space-y-2 py-4 px-2">
-          <div className='absolute z-10 top-2 right-2'><Pencil size={16} color="#3c675c" weight="light" /></div>
+          <div onClick={onEdit} className='absolute z-10 top-2 right-2'><Pencil size={16} color="#3c675c" weight="light" /></div>
           <div className="relative flex flex-col">
             <h3 className="font-semibold">Loan Amount Requested:</h3>
             <p className="text-[1rem] font-normal"><span className='text-[.60rem] font-semibold absolute bottom-[.15rem]'>$</span>&nbsp;  {loanDetailsInfo.loanAmountRequested}
@@ -28,7 +38,7 @@ const DisplayLoanDetailsInfo = ({ formData }) => {
           </div>
           <div className="relative flex flex-col">
             <h3 className="font-semibold">Reason if Other:</h3>
-            <p className="text-[1rem] font-normal">{loanDetailsInfo.otherSelectedDesc}
+            <p className="text-[0.9rem] font-normal">{loanDetailsInfo.otherSelectedDesc}
             </p>
           </div>
           <div className="relative flex flex-col">
