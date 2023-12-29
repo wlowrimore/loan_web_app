@@ -1,9 +1,20 @@
+'use client'
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Logo from "/public/eagle-logo.webp";
 import { Pencil } from '@phosphor-icons/react'
+import { useFormData } from "../../../../../FormDataContext";
 
-const DisplayFinancialInfo = ({ formData }) => {
-  const { financialInfo } = formData;
+const DisplayFinancialInfo = ({ onEdit, updateFormData }) => {
+  const { formData } = useFormData()
+  const [financialInfo, setFinancialInfo] = useState(formData?.financialInfo)
+
+  useEffect(() => {
+    setFinancialInfo(updateFormData)
+    console.log("New Financial FormData:", updateFormData)
+  }, [formData?.fianancialInfo])
+
   return (
     <div className="flex flex-wrap gap-6 w-full">
       <div className="flex flex-col border-8 my-4 border-emerald-700/70 rounded w-full">
@@ -13,7 +24,7 @@ const DisplayFinancialInfo = ({ formData }) => {
           </h1>
         </header>
         <div className="relative space-y-2 py-4 px-2">
-          <div className='absolute z-10 top-2 right-2'><Pencil size={16} color="#3c675c" weight="light" /></div>
+          <div onClick={onEdit} className='absolute z-10 top-2 right-2'><Pencil size={16} color="#3c675c" weight="light" /></div>
           <div className="flex flex-col">
             <h3 className="font-semibold">Housing Type:</h3>
             <p className="text-[1rem] font-normal">

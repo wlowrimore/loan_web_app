@@ -8,12 +8,16 @@ import EditPersonalInfo from "../forms/editDisplay-component/EditPersonalInfo";
 import DisplayEmploymentInfo from "../forms/editDisplay-component/DisplayEmploymentInfo";
 import EditEmploymentInfo from "../forms/editDisplay-component/EditEmploymentInfo";
 
+import DisplayFinancialInfo from "../forms/editDisplay-component/DisplayFinancialInfo";
+import EditFinancialInfo from "../forms/editDisplay-component/EditFinancialInfo";
+
 import { useFormData } from "../../../../FormDataContext";
 
 const ConfirmAndSubmit = ({ onSave }) => {
   const { formData, updateFormData } = useFormData();
   const [editedPersonalData, setEditedPersonalData] = useState(formData.personalInfo)
   const [editedEmploymentData, setEditedEmploymentData] = useState(formData.employmentInfo)
+  const [editedFinancialData, setEditedFinancialData] = useState(formData.financialInfo)
 
   console.log("formData form ConfirmAndSubmit.jsx:", formData)
 
@@ -22,6 +26,9 @@ const ConfirmAndSubmit = ({ onSave }) => {
 
   const [isEmploymentInfoEditable, setIsEmploymentInfoEditable] = useState(false)
   const [employmentData, setEmploymentData] = useState(formData.employmentInfo)
+
+  const [isFinancialInfoEditable, setIsFinancialInfoEditable] = useState(false)
+  const [financialData, setFinancialData] = useState(formData.financialInfo)
 
   const handleEditPersonalInfo = () => {
     setIsPersonalInfoEditable(!isPersonalInfoEditable)
@@ -40,6 +47,14 @@ const ConfirmAndSubmit = ({ onSave }) => {
     setEditedEmploymentData(editedData)
   }
 
+  const handleEditFinancialInfo = () => {
+    setIsFinancialInfoEditable(!isFinancialInfoEditable)
+  }
+
+  const handleFinancialInfoUpdate = (editedData) => {
+    setEditedFinancialData(editedData)
+  }
+
   const handleSave = () => {
     // Validate and convert dateOfBirth to a valid Date object
     const dateOfBirth = parseDate(personalData.dateOfBirth);
@@ -51,7 +66,10 @@ const ConfirmAndSubmit = ({ onSave }) => {
       },
       employmentInfo: {
         ...employmentData,
-      }
+      },
+      financialInfo: {
+        ...financialData,
+      },
     };
 
     updateFormData(editedData);
@@ -94,11 +112,14 @@ const ConfirmAndSubmit = ({ onSave }) => {
         )}
 
         {/* FINANCIAL INFO */}
-        {/* {isFinancialInfoEditable ? (
-          <EditFinancialInfo />
+        {isFinancialInfoEditable ? (
+          <EditFinancialInfo
+            formData={formData}
+            onSave={handleFinancialInfoUpdate}
+            onEdit={handleEditFinancialInfo} />
         ) : (
-          <DisplayFinancialInfo formData={formData} />
-        )} */}
+          <DisplayFinancialInfo updateFormData={editedFinancialData} onEdit={handleEditFinancialInfo} />
+        )}
 
         {/* LOAN DETAILS INFO */}
         {/* {isLoanDetailsInfoEditable ? (
